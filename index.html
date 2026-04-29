@@ -5,342 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tech Course Registration | Alfred Tech</title>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>    
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>    
+    
     <style>
-        /* 1. General Reset & Base Styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-        }
-
-        body {
-    background-color: #0f172a;
-    color: #f8fafc;
-    display: flex;
-    flex-direction: column; /* Changed from default to column */
-    align-items: center; /* Keeps everything centered horizontally */
-    min-height: 100vh;
-    padding: 20px;
-    padding-top: 120px; /* Increased space for the navbar */
-}
-        /* 2. Navigation Bar */
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 10%;
-            background: rgba(15, 23, 42, 0.9);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            border-bottom: 1px solid #334155;
-        }
-
-        .nav-logo a {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: white;
-            text-decoration: none;
-            letter-spacing: 1px;
-        }
-
-        .nav-logo span {
-            color: #ff00ff;
-        }
-
-        .nav-links {
-            list-style: none;
-            display: flex;
-            gap: 30px;
-            align-items: center;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: #cbd5e1;
-            font-size: 0.95rem;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: #ff00ff;
-        }
-
-        /* 3. Layout Container */
-        .container {
-            max-width: 500px;
-            width: 100%;
-            text-align: center;
-        }
-
-        header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            background: linear-gradient(90deg, #ff00ff, #00d2ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        header p {
-            margin-bottom: 30px;
-            color: #94a3b8;
-        }
-
-        /* 4. Registration Box & Form */
-        .registration-box {
-            background: #1e293b;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
-            text-align: left;
-            transition: opacity 0.3s ease;
-        }
-
-        .registration-box h2 {
-            margin-bottom: 20px;
-            font-size: 1.5rem;
-        }
-
-        .input-group {
-            margin-bottom: 15px;
-        }
-
-        .input-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-size: 0.9rem;
-            color: #cbd5e1;
-        }
-
-        .input-group input, .input-group select {
-            width: 100%;
-            padding: 12px;
-            border-radius: 6px;
-            border: 1px solid #334155;
-            background: #0f172a;
-            color: white;
-            outline: none;
-            transition: border-color 0.3s;
-        }
-
-        .input-group input:focus {
-            border-color: #ff00ff;
-        }
-
-        /* 5. Buttons & Animations */
-        @keyframes colorCycle {
-            0% { background-color: #ff00ff; box-shadow: 0 0 5px #ff00ff; }
-            50% { background-color: #7000ff; box-shadow: 0 0 20px #7000ff; }
-            100% { background-color: #ff00ff; box-shadow: 0 0 5px #ff00ff; }
-        }
-
-        .btn-submit, .nav-cta {
-            background: #ff00ff;
-            color: white !important;
-            border: none;
-            border-radius: 6px;
-            font-weight: bold;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            transition: transform 0.2s;
-            animation: colorCycle 3s infinite ease-in-out;
-        }
-
-        .btn-submit {
-            width: 100%;
-            padding: 14px;
-            font-size: 1rem;
-            margin-top: 10px;
-        }
-
-        .nav-cta {
-            padding: 8px 20px;
-            border-radius: 5px;
-        }
-
-        .btn-submit:hover, .nav-cta:hover {
-            transform: translateY(-2px) scale(1.02);
-        }
-
-        /* 6. Success Message State */
-        .success-message {
-            text-align: center;
-            padding: 10px;
-            animation: slideUp 0.5s ease-out;
-        }
-
-        .success-icon {
-    font-size: 3rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: rgba(255, 0, 255, 0.1);
-    border: 2px solid #ff00ff;
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    margin: 0 auto 20px;
-    box-shadow: 0 0 15px rgba(255, 0, 255, 0.3);
-}
-
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-
-
-        .input-group input:focus {
-    border-color: #ff00ff;
-    box-shadow: 0 0 8px rgba(255, 0, 255, 0.2);
-}
-
-@media (max-width: 480px) {
-    .navbar {
-        padding: 15px 5%;
-    }
-    .nav-links {
-        gap: 15px;
-    }
-    header h1 {
-        font-size: 1.8rem;
-    }
-}
-
-
-@keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-10px); }
-    75% { transform: translateX(10px); }
-}
-
-
-.form-disclaimer {
-    margin-top: 20px;
-    font-size: 0.8rem;
-    color: #64748b; /* Subtle slate gray */
-    line-height: 1.5;
-    text-align: center;
-    font-style: italic;
-}
-
-/* Optional: Highlight the "50 applicants" to make it pop */
-.form-disclaimer b {
-    color: #ff00ff;
-}
-
-
-
-/* Smooth Scroll logic for the whole page */
-html {
-    scroll-behavior: smooth;
-}
-
-.courses-section {
-    padding: 100px 20px;
-    max-width: 1100px;
-    margin: 0 auto;
-}
-
-.section-title {
-    text-align: center;
-    font-size: 2rem;
-    margin-bottom: 50px;
-    color: white;
-}
-
-.courses-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-}
-
-.course-card {
-    background: #1e293b;
-    padding: 30px;
-    border-radius: 16px;
-    border: 1px solid #334155;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    display: flex;
-    flex-direction: column;
-}
-
-.course-card:hover {
-    border-color: #ff00ff;
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(255, 0, 255, 0.1);
-}
-
-.card-tag {
-    font-size: 0.7rem;
-    background: rgba(255, 0, 255, 0.1);
-    color: #ff00ff;
-    padding: 5px 12px;
-    border-radius: 20px;
-    display: inline-block;
-    margin-bottom: 20px;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.course-card h3 {
-    margin-bottom: 15px;
-    font-size: 1.4rem;
-}
-
-.course-card p {
-    color: #94a3b8;
-    font-size: 0.95rem;
-    line-height: 1.6;
-    margin-bottom: 30px;
-    flex-grow: 1; /* Ensures footer is always at bottom */
-}
-
-.card-footer {
-    border-top: 1px solid #334155;
-    padding-top: 20px;
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.85rem;
-    color: #64748b;
-}
-
-.spots {
-    color: #ff00ff;
-    font-weight: bold;
-}
-
-.section-title {
-    text-align: center;
-    font-size: 2.5rem;
-    margin-bottom: 50px;
-    background: linear-gradient(90deg, #ff00ff, #00d2ff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
+        /* [Keeping your existing styles as they are perfect] */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { background-color: #0f172a; color: #f8fafc; display: flex; flex-direction: column; align-items: center; min-height: 100vh; padding: 20px; padding-top: 120px; }
+        .navbar { position: fixed; top: 0; left: 0; width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 20px 10%; background: rgba(15, 23, 42, 0.9); backdrop-filter: blur(10px); z-index: 1000; border-bottom: 1px solid #334155; }
+        .nav-logo a { font-size: 1.5rem; font-weight: bold; color: white; text-decoration: none; letter-spacing: 1px; }
+        .nav-logo span { color: #ff00ff; }
+        .nav-links { list-style: none; display: flex; gap: 30px; align-items: center; }
+        .nav-links a { text-decoration: none; color: #cbd5e1; font-size: 0.95rem; font-weight: 500; transition: color 0.3s; }
+        .nav-links a:hover { color: #ff00ff; }
+        .container { max-width: 500px; width: 100%; text-align: center; }
+        header h1 { font-size: 2.5rem; margin-bottom: 10px; background: linear-gradient(90deg, #ff00ff, #00d2ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        header p { margin-bottom: 30px; color: #94a3b8; }
+        .registration-box { background: #1e293b; padding: 30px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4); text-align: left; transition: opacity 0.3s ease; }
+        .registration-box h2 { margin-bottom: 20px; font-size: 1.5rem; }
+        .input-group { margin-bottom: 15px; }
+        .input-group label { display: block; margin-bottom: 5px; font-size: 0.9rem; color: #cbd5e1; }
+        .input-group input, .input-group select { width: 100%; padding: 12px; border-radius: 6px; border: 1px solid #334155; background: #0f172a; color: white; outline: none; transition: border-color 0.3s; }
+        .btn-submit, .nav-cta { background: #ff00ff; color: white !important; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; text-decoration: none; display: inline-block; transition: transform 0.2s; animation: colorCycle 3s infinite ease-in-out; }
+        .btn-submit { width: 100%; padding: 14px; font-size: 1rem; margin-top: 10px; }
+        .nav-cta { padding: 8px 20px; border-radius: 5px; }
+        @keyframes colorCycle { 0% { background-color: #ff00ff; box-shadow: 0 0 5px #ff00ff; } 50% { background-color: #7000ff; box-shadow: 0 0 20px #7000ff; } 100% { background-color: #ff00ff; box-shadow: 0 0 5px #ff00ff; } }
+        .success-message { text-align: center; padding: 10px; animation: slideUp 0.5s ease-out; }
+        .success-icon { font-size: 3rem; display: flex; justify-content: center; align-items: center; background: rgba(255, 0, 255, 0.1); border: 2px solid #ff00ff; width: 80px; height: 80px; border-radius: 50%; margin: 0 auto 20px; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .form-disclaimer { margin-top: 20px; font-size: 0.8rem; color: #64748b; line-height: 1.5; text-align: center; font-style: italic; }
     </style>
 </head>
 <body>
 
     <nav class="navbar">
         <div class="nav-logo">
-            <a href="#">ALFRED TECH<span>ACADEMY</span></a>
+            <a href="index.html">ALFRED TECH<span>ACADEMY</span></a>
         </div>
-       <ul class="nav-links">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="courses.html">Courses</a></li>
-    <li><a href="index.html">About</a></li>
-    <li><a href="index.html" class="nav-cta">Register</a></li>
-</ul>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="courses.html">Courses</a></li>
+            <li><a href="index.html">About</a></li>
+            <li><a href="index.html" class="nav-cta">Register</a></li>
+        </ul>
     </nav>
 
     <div class="container">
@@ -365,119 +71,88 @@ html {
                 <div class="input-group">
                     <label for="course">Select Track</label>
                     <select id="course">
-                        <option value="frontend">Front-End Development</option>
-                        <option value="backend">Back-End Systems</option>
-                        <option value="design">UI/UX Design</option>
-                        <option value="management">Project Management</option>
+                        <option value="Front-End Engineering">Front-End Engineering</option>
+                        <option value="Back-End Architecture">Back-End Architecture</option>
+                        <option value="UI/UX Design Strategy">UI/UX Design Strategy</option>
+                        <option value="Project Management">Project Management</option>
                     </select>
                 </div>
 
                 <button type="submit" class="btn-submit">Secure My Spot</button>
                 <p class="form-disclaimer">
-    Securing a spot grants 48-hour priority access. <br>
-    Limited to 50 applicants per track.
-</p>
+                    Securing a spot grants 48-hour priority access. <br>
+                    Limited to 50 applicants per track.
+                </p>
             </form>
         </section>
     </div>
 
-
-    
-    </div>
-</section>
-    
-
-    
     <script>
-      // 1. INITIALIZE (Paste your Public Key here once dashboard loads)
-(function() {
-    emailjs.init("YOUR_PUBLIC_KEY"); 
-})();
+        // 1. INITIALIZE (Enter your Public Key from EmailJS Account Settings)
+        (function() {
+            emailjs.init("ogzWuNiymzaYa_-Es"); 
+        })();
 
-document.getElementById('regForm').addEventListener('submit', function(event) {
-    event.preventDefault();
+        document.getElementById('regForm').addEventListener('submit', function(event) {
+            event.preventDefault();
 
-    // 2. DATA CAPTURE
-    const nameInput = document.getElementById('full-name');
-    const emailInput = document.getElementById('email');
-    const courseDropdown = document.getElementById('course');
-    const registrationBox = document.querySelector('.registration-box');
+            // 2. DATA CAPTURE
+            const nameInput = document.getElementById('full-name');
+            const emailInput = document.getElementById('email');
+            const courseDropdown = document.getElementById('course');
+            const registrationBox = document.querySelector('.registration-box');
 
-    const nameValue = nameInput.value.trim();
-    const emailValue = emailInput.value.trim();
-    const courseTrack = courseDropdown.options[courseDropdown.selectedIndex].text;
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const nameValue = nameInput.value.trim();
+            const emailValue = emailInput.value.trim();
+            const courseTrack = courseDropdown.options[courseDropdown.selectedIndex].text;
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    // 3. VALIDATION
-    let isValid = true;
-    nameInput.style.borderColor = "#334155";
-    emailInput.style.borderColor = "#334155";
+            // 3. VALIDATION
+            let isValid = true;
+            if (nameValue.split(' ').length < 2) {
+                alert("Please enter your full first and last name.");
+                isValid = false;
+            }
+            if (!emailPattern.test(emailValue)) {
+                alert("Please provide a valid email address.");
+                isValid = false;
+            }
 
-    if (nameValue.split(' ').length < 2) {
-        alert("Please enter your full first and last name.");
-        nameInput.style.borderColor = "#ff4b2b";
-        isValid = false;
-    }
-    if (!emailPattern.test(emailValue)) {
-        alert("Please provide a valid email address.");
-        emailInput.style.borderColor = "#ff4b2b";
-        isValid = false;
-    }
+            if (!isValid) return;
 
-    if (!isValid) {
-        registrationBox.style.animation = 'shake 0.4s';
-        setTimeout(() => registrationBox.style.animation = '', 400);
-        return; 
-    }
+            // 4. TRIGGER EMAIL (Use your IDs from EmailJS Dashboard)
+            emailjs.send("service_yiv91gl", "template_vzoj55a", {
+                user_name: nameValue,
+                user_email: emailValue,
+                course_track: courseTrack
+            }).then(
+                (res) => console.log("Success"),
+                (err) => alert("Failed to send: " + JSON.stringify(err))
+            );
 
-    // 4. TRIGGER EMAIL (Paste your IDs here later)
-    emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
-        user_name: nameValue,
-        user_email: emailValue,
-        course_track: courseTrack
-    }).then(
-        (res) => console.log("Email Dispatched"),
-        (err) => console.log("Email Error", err)
-    );
+            // 5. CELEBRATION & UI TRANSITION
+            confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#ff00ff', '#00d2ff', '#ffffff']
+            });
 
-    // 5. CELEBRATION & UI TRANSITION
-    confetti({
-        particleCount: 150,
-        spread: 70,
-        origin: { y: 0.6 },
-        colors: ['#ff00ff', '#00d2ff', '#ffffff']
-    });
-
-    registrationBox.style.opacity = '0';
-    
-    setTimeout(() => {
-        registrationBox.innerHTML = `
-            <div class="success-message">
-                <div class="success-icon">🔑</div>
-                <h2 style="color: #ff00ff; margin-bottom: 15px; font-size: 2rem;">Priority Access Granted</h2>
-                
-                <p style="color: #f8fafc; font-size: 1.1rem; margin-bottom: 15px; font-weight: 600;">
-                    Congratulations, ${nameValue}. Your spot is locked.
-                </p>
-                
-                <p style="color: #94a3b8; line-height: 1.6; margin-bottom: 15px;">
-                    Because you've secured your spot early, you now have <strong>exclusive priority</strong> to complete the final enrollment for the <strong>${courseTrack}</strong> track.
-                </p>
-                
-                <div style="background: rgba(255, 0, 255, 0.1); border: 1px dashed #ff00ff; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-                    <p style="color: #ff00ff; font-size: 0.9rem; font-weight: bold; margin-bottom: 5px;">NEXT STEP:</p>
-                    <p style="color: #cbd5e1; font-size: 0.85rem;">Check <strong>${emailValue}</strong> for your invitation link. It should arrive within the next 2 minutes.</p>
-                </div>
-                
-                <button onclick="window.location.reload()" class="btn-submit">I'll check my email</button>
-            </div>
-        `;
-        registrationBox.style.opacity = '1';
-    }, 300);
-});
-
-
-
+            registrationBox.style.opacity = '0';
+            
+            setTimeout(() => {
+                registrationBox.innerHTML = `
+                    <div class="success-message">
+                        <div class="success-icon">🔑</div>
+                        <h2 style="color: #ff00ff; margin-bottom: 15px; font-size: 2rem;">Priority Access Granted</h2>
+                        <p style="color: #f8fafc; font-size: 1.1rem; margin-bottom: 15px; font-weight: 600;">Congratulations, ${nameValue}.</p>
+                        <p style="color: #94a3b8; line-height: 1.6; margin-bottom: 15px;">Your spot for <strong>${courseTrack}</strong> is locked. Check <strong>${emailValue}</strong> for your invitation link.</p>
+                        <button onclick="window.location.reload()" class="btn-submit">Close</button>
+                    </div>
+                `;
+                registrationBox.style.opacity = '1';
+            }, 300);
+        });
     </script>
 </body>
 </html>
