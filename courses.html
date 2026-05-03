@@ -20,7 +20,7 @@
             align-items: center; 
             min-height: 100vh; 
             padding: 20px; 
-            padding-top: 120px; /* Space for fixed navbar */
+            padding-top: 120px; 
         }
 
         .navbar { 
@@ -82,7 +82,6 @@
             50% { background-color: #7000ff; box-shadow: 0 0 20px #7000ff; }
         }
 
-        /* Courses Header */
         .container { 
             max-width: 1000px; 
             width: 100%; 
@@ -99,12 +98,14 @@
 
         header p { margin-bottom: 40px; color: #94a3b8; }
 
-        /* Course Grid Section */
+        /* COURSE GRID: 2-by-2 Desktop Layout */
         .course-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(2, 1fr); 
             gap: 25px;
             width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
         }
 
         .course-card {
@@ -138,13 +139,13 @@
         @media (max-width: 768px) {
             .navbar {
                 padding: 15px 5%;
-                flex-wrap: wrap;       /* Stack Logo and Links */
+                flex-wrap: wrap;
                 justify-content: center; 
                 height: auto; 
             }
 
             .nav-logo {
-                width: 100%;           /* Force logo to top line */
+                width: 100%;
                 text-align: center;
                 margin-bottom: 10px;
             }
@@ -159,8 +160,13 @@
 
             .nav-links a { font-size: 0.8rem; }
 
+            /* COURSE GRID: 1-by-1 Mobile Layout */
+            .course-grid {
+                grid-template-columns: 1fr;
+            }
+
             body { 
-                padding-top: 150px;    /* Extra space so stacked nav doesn't cover H1 */
+                padding-top: 150px; 
             }
 
             header h1 { font-size: 2rem; }
