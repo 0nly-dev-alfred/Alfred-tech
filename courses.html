@@ -5,211 +5,165 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our Courses | Alfred Tech Academy</title>
     <style>
-        /* 1. Variables & Global Reset */
-        :root {
-            --primary: #ff00ff;
-            --secondary: #00d2ff;
-            --accent-orange: #ffa500;
-            --accent-green: #10b981;
-            --bg-dark: #0f172a;
-            --card-bg: #1e293b;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --border: #334155;
-        }
-
-        * {
+        * { 
             margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Roboto, sans-serif;
+            padding: 0; 
+            box-sizing: border-box; 
+            font-family: 'Segoe UI', sans-serif;
         }
 
-        html { scroll-behavior: smooth; }
-
-        body {
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            line-height: 1.6;
-            padding-top: 100px;
-            padding-bottom: 60px;
+        body { 
+            background-color: #0f172a;
+            color: #f8fafc;
+            display: flex;
+            flex-direction: column;
+            align-items: center; 
+            min-height: 100vh; 
+            padding: 20px; 
+            padding-top: 120px; /* Space for fixed navbar */
         }
 
-        /* 2. Navigation Bar */
-        .navbar {
-            position: fixed;
+        .navbar { 
+            position: fixed; 
             top: 0;
-            left: 0;
+            left: 0; 
             width: 100%;
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: center; 
             padding: 20px 10%;
-            background: rgba(15, 23, 42, 0.95);
+            background: rgba(15, 23, 42, 0.9);
             backdrop-filter: blur(10px);
-            z-index: 1000;
-            border-bottom: 1px solid var(--border);
+            z-index: 1000; 
+            border-bottom: 1px solid #334155; 
         }
 
-        .nav-logo a {
+        .nav-logo a { 
             font-size: 1.5rem;
             font-weight: bold;
-            color: white;
+            color: white; 
             text-decoration: none;
-            letter-spacing: 1px;
+            letter-spacing: 1px; 
+            white-space: nowrap;
         }
 
-        .nav-logo span { color: var(--primary); }
+        .nav-logo span { color: #ff00ff; }
 
-        .nav-links {
-            list-style: none;
-            display: flex;
-            gap: 30px;
+        .nav-links { 
+            list-style: none; 
+            display: flex; 
+            gap: 25px;
             align-items: center;
         }
 
-        .nav-links a {
-            text-decoration: none;
-            color: #cbd5e1;
-            font-size: 0.95rem;
-            transition: all 0.3s ease; 
+        .nav-links a { 
+            text-decoration: none; 
+            color: #cbd5e1; 
+            font-size: 0.95rem; 
+            font-weight: 500; 
+            transition: color 0.3s;
+            white-space: nowrap;
         }
 
-        .nav-links a:hover { 
-            color: var(--primary); 
-        }
+        .nav-links a:hover { color: #ff00ff; }
 
         .nav-cta {
-            background: var(--primary);
-            padding: 8px 20px;
-            border-radius: 5px;
-            color: white !important;
-            font-weight: bold;
+            background: #ff00ff; 
+            color: white !important; 
+            padding: 8px 15px;
+            border-radius: 6px; 
+            font-weight: bold; 
+            text-decoration: none;
             animation: colorCycle 3s infinite ease-in-out;
         }
 
-        /* 3. Main Section Header */
-        .courses-section {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 20px;
+        @keyframes colorCycle { 
+            0%, 100% { background-color: #ff00ff; box-shadow: 0 0 5px #ff00ff; }
+            50% { background-color: #7000ff; box-shadow: 0 0 20px #7000ff; }
         }
 
-        .courses-header {
-            text-align: center;
-            margin-bottom: 60px;
+        /* Courses Header */
+        .container { 
+            max-width: 1000px; 
+            width: 100%; 
+            text-align: center; 
         }
 
-        .courses-header h1 {
-            font-size: 3rem;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        header h1 { 
+            font-size: 2.5rem; 
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #ff00ff, #00d2ff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 10px;
         }
 
-        .courses-header p { color: var(--text-muted); font-size: 1.1rem; }
+        header p { margin-bottom: 40px; color: #94a3b8; }
 
-        /* 4. Grid & Cards */
-        .courses-grid {
+        /* Course Grid Section */
+        .course-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            width: 100%;
         }
 
         .course-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            padding: 30px;
+            background: #1e293b;
+            padding: 25px;
             border-radius: 12px;
-            display: flex;
-            flex-direction: column;
-            transition: all 0.3s ease;
-            cursor: default;
+            border: 1px solid #334155;
+            text-align: left;
+            transition: transform 0.3s ease, border-color 0.3s ease;
         }
 
         .course-card:hover {
-            border-color: var(--primary);
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(255, 0, 255, 0.1);
+            transform: translateY(-5px);
+            border-color: #ff00ff;
         }
 
-        .course-card:nth-child(1) { border-top: 4px solid var(--primary); }
-        .course-card:nth-child(2) { border-top: 4px solid var(--secondary); }
-        .course-card:nth-child(3) { border-top: 4px solid var(--accent-orange); }
-        .course-card:nth-child(4) { border-top: 4px solid var(--accent-green); }
+        .course-icon { font-size: 2rem; margin-bottom: 15px; display: block; }
 
-        .card-tag {
-            font-size: 0.75rem;
-            padding: 5px 12px;
-            border-radius: 20px;
-            display: inline-block;
-            margin-bottom: 20px;
-            font-weight: bold;
-            text-transform: uppercase;
-            width: fit-content;
-        }
+        .course-card h3 { color: #ff00ff; margin-bottom: 10px; }
 
-        .course-card h3 { margin-bottom: 15px; font-size: 1.5rem; }
+        .course-card p { color: #94a3b8; font-size: 0.9rem; line-height: 1.6; margin-bottom: 20px; }
 
-        .course-card p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            margin-bottom: 25px;
-            flex-grow: 1;
-        }
-
-        /* 5. Card Footer */
-        .card-footer {
-            border-top: 1px solid var(--border);
-            padding-top: 20px;
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.85rem;
-            color: #64748b;
-        }
-
-        .spots { color: var(--primary); font-weight: bold; animation: pulse 2s infinite; }
-
-        /* 6. Animations */
-        @keyframes colorCycle {
-            0% { background-color: var(--primary); box-shadow: 0 0 5px var(--primary); }
-            50% { background-color: #7000ff; box-shadow: 0 0 15px #7000ff; }
-            100% { background-color: var(--primary); box-shadow: 0 0 5px var(--primary); }
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
-        .btn-register-bottom {
-            display: block;
-            width: 100%;
-            max-width: 320px;
-            margin: 60px auto 0;
-            padding: 16px;
-            text-align: center;
-            background: var(--primary);
-            color: white;
+        .btn-details {
+            color: #00d2ff;
             text-decoration: none;
-            font-weight: bold;
-            border-radius: 8px;
-            animation: colorCycle 3s infinite ease-in-out;
-            transition: transform 0.2s;
+            font-weight: 600;
+            font-size: 0.9rem;
         }
 
-        .btn-register-bottom:hover { transform: scale(1.05); }
-
-        /* 7. Responsive Media Query */
+        /* MOBILE RESPONSIVE CORRECTIONS */
         @media (max-width: 768px) {
-            .navbar { padding: 15px 5%; }
-            .nav-links { gap: 15px; }
+            .navbar {
+                padding: 15px 5%;
+                flex-wrap: wrap;       /* Stack Logo and Links */
+                justify-content: center; 
+                height: auto; 
+            }
+
+            .nav-logo {
+                width: 100%;           /* Force logo to top line */
+                text-align: center;
+                margin-bottom: 10px;
+            }
+
+            .nav-logo a { font-size: 1.2rem; }
+
+            .nav-links {
+                width: 100%;
+                justify-content: center; 
+                gap: 12px;
+            }
+
             .nav-links a { font-size: 0.8rem; }
-            .courses-grid { grid-template-columns: 1fr; gap: 20px; }
-            .courses-header h1 { font-size: 2.2rem; }
-            .course-card { padding: 20px; }
+
+            body { 
+                padding-top: 150px;    /* Extra space so stacked nav doesn't cover H1 */
+            }
+
+            header h1 { font-size: 2rem; }
         }
     </style>
 </head>
@@ -221,62 +175,48 @@
         </div>
         <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
-            <li><a href="courses.html" style="color: var(--primary); font-weight: bold;">Courses</a></li>
+            <li><a href="courses.html">Courses</a></li>
             <li><a href="index.html">About</a></li>
             <li><a href="index.html" class="nav-cta">Register</a></li>
         </ul>
     </nav>
 
-    <main class="courses-section">
-        <div class="courses-header">
-            <h1 class="section-title">Technical Tracks</h1>
-            <p>High-impact training for the next generation of tech leaders.</p>
-        </div>
+    <div class="container">
+        <header>
+            <h1>Our Training Tracks</h1>
+            <p>Master the most in-demand skills in the tech ecosystem.</p>
+        </header>
 
-        <div class="courses-grid">
+        <section class="course-grid">
             <div class="course-card">
-                <div class="card-tag" style="background: rgba(255, 0, 255, 0.1); color: var(--primary);">Hiring Now</div>
+                <span class="course-icon">💻</span>
                 <h3>Front-End Engineering</h3>
-                <p>Master React.js, Tailwind CSS, and Framer Motion. Build interfaces that look like the future.</p>
-                <div class="card-footer">
-                    <span>⏱ 8 Weeks</span>
-                    <span class="spots">5 Spots Left</span>
-                </div>
+                <p>Learn HTML5, CSS3, JavaScript (ES6+), and React. Build responsive, modern websites from scratch.</p>
+                <a href="index.html" class="btn-details">Enroll Now →</a>
             </div>
 
             <div class="course-card">
-                <div class="card-tag" style="background: rgba(0, 210, 255, 0.1); color: var(--secondary);">Systems</div>
+                <span class="course-icon">⚙️</span>
                 <h3>Back-End Architecture</h3>
-                <p>Deep dive into Node.js, PostgreSQL, and System Design. Focus on scalability and security.</p>
-                <div class="card-footer">
-                    <span>⏱ 10 Weeks</span>
-                    <span class="spots">8 Spots Left</span>
-                </div>
+                <p>Master Node.js, Express, and Databases (MongoDB/SQL). Build the engines that power the web.</p>
+                <a href="index.html" class="btn-details">Enroll Now →</a>
             </div>
 
             <div class="course-card">
-                <div class="card-tag" style="background: rgba(255, 165, 0, 0.1); color: var(--accent-orange);">Creative</div>
+                <span class="course-icon">🎨</span>
                 <h3>UI/UX Design Strategy</h3>
-                <p>Learn user psychology and professional Figma workflows. Bridging the gap between art and code.</p>
-                <div class="card-footer">
-                    <span>⏱ 6 Weeks</span>
-                    <span class="spots">12 Spots Left</span>
-                </div>
+                <p>Design stunning interfaces using Figma. Understand user psychology and wireframing techniques.</p>
+                <a href="index.html" class="btn-details">Enroll Now →</a>
             </div>
 
             <div class="course-card">
-                <div class="card-tag" style="background: rgba(16, 185, 129, 0.1); color: var(--accent-green);">Leadership</div>
+                <span class="course-icon">📊</span>
                 <h3>Project Management</h3>
-                <p>Master Agile, Scrum, and team leadership. The bridge between business goals and engineering execution.</p>
-                <div class="card-footer">
-                    <span>⏱ 5 Weeks</span>
-                    <span class="spots">15 Spots Left</span>
-                </div>
+                <p>Learn Agile, Scrum, and leadership skills to manage high-performing tech teams effectively.</p>
+                <a href="index.html" class="btn-details">Enroll Now →</a>
             </div>
-        </div>
-
-        <a href="index.html" class="btn-register-bottom">Ready to Join? Register Now</a>
-    </main>
+        </section>
+    </div>
 
 </body>
 </html>
