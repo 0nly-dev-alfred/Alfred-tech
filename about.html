@@ -57,7 +57,7 @@
             letter-spacing: 2px; font-weight: bold; margin-bottom: 10px; display: block;
         }
 
-        /* --- METHODOLOGY (THE PROCESS) --- */
+        /* --- METHODOLOGY --- */
         .method-grid {
             display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 30px; margin-top: 40px;
@@ -69,10 +69,9 @@
         }
 
         .method-card:hover { border-color: #00d2ff; transform: translateY(-5px); }
-
         .method-card h3 { color: #00d2ff; margin-bottom: 15px; }
 
-        /* --- THE TECH STACK SECTION --- */
+        /* --- TECH STACK SECTION --- */
         .tech-stack {
             background: rgba(30, 41, 59, 0.5); border-radius: 20px;
             padding: 40px; margin: 60px 0; border: 1px solid rgba(255, 0, 255, 0.2);
@@ -100,6 +99,7 @@
         @media (max-width: 768px) {
             .navbar { padding: 15px 5%; flex-wrap: wrap; justify-content: center; height: auto; }
             .nav-logo { width: 100%; text-align: center; margin-bottom: 10px; }
+            .nav-links { width: 100%; justify-content: center; gap: 12px; }
             .about-hero h1 { font-size: 2.5rem; }
             .values-section { grid-template-columns: 1fr; }
         }
@@ -115,6 +115,7 @@
             <li><a href="index.html">Home</a></li>
             <li><a href="courses.html">Courses</a></li>
             <li><a href="about.html">About</a></li>
+            <!-- Pointing back to index to register -->
             <li><a href="index.html" class="nav-cta">Apply Now</a></li>
         </ul>
     </nav>
@@ -163,7 +164,6 @@
         <!-- CORE VALUES -->
         <section class="values-section">
             <div class="values-img">
-                <!-- You can replace this with a real photo of yourself or the academy later -->
                 <div style="background: linear-gradient(45deg, #ff00ff, #00d2ff); width: 100%; height: 350px; border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 5rem;">💡</div>
             </div>
             <div class="values-text">
