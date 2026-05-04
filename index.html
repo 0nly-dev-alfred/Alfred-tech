@@ -25,7 +25,7 @@
             padding-top: 120px; 
         }
 
-        /* NAVBAR PATTERN */
+        /* NAVBAR */
         .navbar { 
             position: fixed; 
             top: 0;
@@ -87,7 +87,7 @@
 
         header p { margin-bottom: 30px; color: #94a3b8; }
 
-        /* REGISTRATION BOX PATTERN */
+        /* REGISTRATION BOX */
         .registration-box { 
             background: #1e293b;
             padding: 30px;
@@ -116,7 +116,7 @@
             outline: none;
         }
 
-        /* BUTTON PATTERN (Color Cycling) */
+        /* BUTTONS */
         .btn-submit, .nav-cta {
             background: #ff00ff; 
             color: white !important; 
@@ -143,37 +143,18 @@
             50% { background-color: #7000ff; box-shadow: 0 0 20px #7000ff; }
         }
 
-        /* MOBILE RESPONSIVE CORRECTIONS */
+        /* MOBILE RESPONSIVE */
         @media (max-width: 768px) {
-            .navbar {
-                padding: 15px 5%;
-                flex-wrap: wrap;
-                justify-content: center; 
-                height: auto;
-            }
-
-            .nav-logo {
-                width: 100%;
-                text-align: center;
-                margin-bottom: 10px;
-            }
-
+            .navbar { padding: 15px 5%; flex-wrap: wrap; justify-content: center; height: auto; }
+            .nav-logo { width: 100%; text-align: center; margin-bottom: 10px; }
             .nav-logo a { font-size: 1.2rem; }
-
-            .nav-links {
-                width: 100%;
-                justify-content: center; 
-                gap: 15px;
-            }
-
+            .nav-links { width: 100%; justify-content: center; gap: 15px; }
             .nav-links a { font-size: 0.85rem; }
-
             body { padding-top: 150px; }
-
             header h1 { font-size: 1.8rem; }
         }
 
-        /* SUCCESS MESSAGE PATTERN */
+        /* SUCCESS MESSAGE */
         .success-message { text-align: center; padding: 10px; animation: slideUp 0.5s ease-out; }
         .success-icon {
             font-size: 3rem; display: flex; justify-content: center; align-items: center; 
@@ -193,8 +174,8 @@
         <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
             <li><a href="courses.html">Courses</a></li>
-            <li><a href="index.html">About</a></li>
-            <li><a href="index.html" class="nav-cta">Register</a></li>
+            <li><a href="about.html">About</a></li> <!-- FIXED -->
+            <li><a href="index.html" class="nav-cta">Register</a></li> <!-- FIXED -->
         </ul>
     </nav>
 
@@ -239,7 +220,6 @@
 
     <script>
         (function() {
-            // EmailJS Public Key
             emailjs.init("ogzWuNiymzaYa_-Es"); 
         })();
 
@@ -255,13 +235,11 @@
             const emailValue = emailInput.value.trim();
             const courseTrack = courseDropdown.options[courseDropdown.selectedIndex].text;
 
-            // Pattern-based validation
             if (nameValue.split(' ').length < 2) {
                 alert("Please enter your full first and last name.");
                 return;
             }
 
-            // Send Email via EmailJS Pattern
             emailjs.send("service_xpgoy1a", "template_vzoj55a", {
                 user_name: nameValue,
                 user_email: emailValue,
@@ -271,7 +249,6 @@
                 (err) => alert("Failed to send: " + JSON.stringify(err))
             );
 
-            // Confetti Trigger Pattern
             confetti({
                 particleCount: 150,
                 spread: 70,
@@ -279,7 +256,6 @@
                 colors: ['#ff00ff', '#00d2ff', '#ffffff']
             });
 
-            // UI Success Transition Pattern
             registrationBox.style.opacity = '0';
             
             setTimeout(() => {
