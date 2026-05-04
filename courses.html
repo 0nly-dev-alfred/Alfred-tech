@@ -5,75 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our Courses | Alfred Tech Academy</title>
     <style>
+        /* [Keeping your existing core styles] */
         * { 
-            margin: 0;
-            padding: 0; 
-            box-sizing: border-box; 
+            margin: 0; padding: 0; box-sizing: border-box; 
             font-family: 'Segoe UI', sans-serif;
         }
 
         body { 
-            background-color: #0f172a;
-            color: #f8fafc;
-            display: flex;
-            flex-direction: column;
-            align-items: center; 
-            min-height: 100vh; 
-            padding: 20px; 
-            padding-top: 120px; 
+            background-color: #0f172a; color: #f8fafc;
+            display: flex; flex-direction: column; align-items: center; 
+            min-height: 100vh; padding: 20px; padding-top: 120px; 
         }
 
         .navbar { 
-            position: fixed; 
-            top: 0;
-            left: 0; 
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center; 
-            padding: 20px 10%;
-            background: rgba(15, 23, 42, 0.9);
-            backdrop-filter: blur(10px);
-            z-index: 1000; 
-            border-bottom: 1px solid #334155; 
+            position: fixed; top: 0; left: 0; width: 100%;
+            display: flex; justify-content: space-between; align-items: center; 
+            padding: 20px 10%; background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(10px); z-index: 1000; border-bottom: 1px solid #334155; 
         }
 
         .nav-logo a { 
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: white; 
-            text-decoration: none;
-            letter-spacing: 1px; 
-            white-space: nowrap;
+            font-size: 1.5rem; font-weight: bold; color: white; 
+            text-decoration: none; letter-spacing: 1px; white-space: nowrap;
         }
 
         .nav-logo span { color: #ff00ff; }
 
-        .nav-links { 
-            list-style: none; 
-            display: flex; 
-            gap: 25px;
-            align-items: center;
-        }
-
+        .nav-links { list-style: none; display: flex; gap: 25px; align-items: center; }
         .nav-links a { 
-            text-decoration: none; 
-            color: #cbd5e1; 
-            font-size: 0.95rem; 
-            font-weight: 500; 
-            transition: color 0.3s;
-            white-space: nowrap;
+            text-decoration: none; color: #cbd5e1; font-size: 0.95rem; 
+            font-weight: 500; transition: color 0.3s;
         }
-
         .nav-links a:hover { color: #ff00ff; }
 
         .nav-cta {
-            background: #ff00ff; 
-            color: white !important; 
-            padding: 8px 15px;
-            border-radius: 6px; 
-            font-weight: bold; 
-            text-decoration: none;
+            background: #ff00ff; color: white !important; padding: 8px 15px;
+            border-radius: 6px; font-weight: bold; text-decoration: none;
             animation: colorCycle 3s infinite ease-in-out;
         }
 
@@ -82,23 +49,17 @@
             50% { background-color: #7000ff; box-shadow: 0 0 20px #7000ff; }
         }
 
-        .container { 
-            max-width: 1000px; 
-            width: 100%; 
-            text-align: center; 
-        }
+        .container { max-width: 1000px; width: 100%; text-align: center; }
 
         header h1 { 
-            font-size: 2.5rem; 
-            margin-bottom: 10px;
+            font-size: 2.5rem; margin-bottom: 10px;
             background: linear-gradient(90deg, #ff00ff, #00d2ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
 
         header p { margin-bottom: 40px; color: #94a3b8; }
 
-        /* COURSE GRID: 2-by-2 Desktop Layout */
+        /* GRID STYLES */
         .course-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr); 
@@ -114,6 +75,7 @@
             border-radius: 12px;
             border: 1px solid #334155;
             text-align: left;
+            position: relative; /* Required for the badge */
             transition: transform 0.3s ease, border-color 0.3s ease;
         }
 
@@ -122,53 +84,32 @@
             border-color: #ff00ff;
         }
 
-        .course-icon { font-size: 2rem; margin-bottom: 15px; display: block; }
-
-        .course-card h3 { color: #ff00ff; margin-bottom: 10px; }
-
-        .course-card p { color: #94a3b8; font-size: 0.9rem; line-height: 1.6; margin-bottom: 20px; }
-
-        .btn-details {
-            color: #00d2ff;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9rem;
+        .course-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 0, 255, 0.1);
+            color: #ff00ff;
+            font-size: 0.7rem;
+            padding: 4px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            font-weight: bold;
+            border: 1px solid #ff00ff;
         }
 
-        /* MOBILE RESPONSIVE CORRECTIONS */
+        .course-icon { font-size: 2rem; margin-bottom: 15px; display: block; }
+        .course-card h3 { color: #ff00ff; margin-bottom: 10px; }
+        .course-card p { color: #94a3b8; font-size: 0.9rem; line-height: 1.6; margin-bottom: 20px; }
+        .btn-details { color: #00d2ff; text-decoration: none; font-weight: 600; font-size: 0.9rem; }
+
+        /* MOBILE RESPONSIVE */
         @media (max-width: 768px) {
-            .navbar {
-                padding: 15px 5%;
-                flex-wrap: wrap;
-                justify-content: center; 
-                height: auto; 
-            }
-
-            .nav-logo {
-                width: 100%;
-                text-align: center;
-                margin-bottom: 10px;
-            }
-
-            .nav-logo a { font-size: 1.2rem; }
-
-            .nav-links {
-                width: 100%;
-                justify-content: center; 
-                gap: 12px;
-            }
-
-            .nav-links a { font-size: 0.8rem; }
-
-            /* COURSE GRID: 1-by-1 Mobile Layout */
-            .course-grid {
-                grid-template-columns: 1fr;
-            }
-
-            body { 
-                padding-top: 150px; 
-            }
-
+            .navbar { padding: 15px 5%; flex-wrap: wrap; justify-content: center; height: auto; }
+            .nav-logo { width: 100%; text-align: center; margin-bottom: 10px; }
+            .nav-links { width: 100%; justify-content: center; gap: 12px; }
+            .course-grid { grid-template-columns: 1fr; }
+            body { padding-top: 150px; }
             header h1 { font-size: 2rem; }
         }
     </style>
@@ -216,9 +157,10 @@
             </div>
 
             <div class="course-card">
-                <span class="course-icon">📊</span>
-                <h3>Project Management</h3>
-                <p>Learn Agile, Scrum, and leadership skills to manage high-performing tech teams effectively.</p>
+                <span class="course-badge">Elite</span>
+                <span class="course-icon">🚀</span>
+                <h3>Full-Stack Mastery</h3>
+                <p>The complete blueprint. Combine Front-End and Back-End skills to build and deploy complex, scalable web apps.</p>
                 <a href="index.html" class="btn-details">Enroll Now →</a>
             </div>
         </section>
