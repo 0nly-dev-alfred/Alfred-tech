@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our Courses | Alfred Tech Academy</title>
     <style>
-        /* [Keeping your existing core styles] */
         * { 
             margin: 0; padding: 0; box-sizing: border-box; 
             font-family: 'Segoe UI', sans-serif;
@@ -17,6 +16,7 @@
             min-height: 100vh; padding: 20px; padding-top: 120px; 
         }
 
+        /* NAVBAR STYLE */
         .navbar { 
             position: fixed; top: 0; left: 0; width: 100%;
             display: flex; justify-content: space-between; align-items: center; 
@@ -24,18 +24,10 @@
             backdrop-filter: blur(10px); z-index: 1000; border-bottom: 1px solid #334155; 
         }
 
-        .nav-logo a { 
-            font-size: 1.5rem; font-weight: bold; color: white; 
-            text-decoration: none; letter-spacing: 1px; white-space: nowrap;
-        }
-
+        .nav-logo a { font-size: 1.5rem; font-weight: bold; color: white; text-decoration: none; letter-spacing: 1px; }
         .nav-logo span { color: #ff00ff; }
-
         .nav-links { list-style: none; display: flex; gap: 25px; align-items: center; }
-        .nav-links a { 
-            text-decoration: none; color: #cbd5e1; font-size: 0.95rem; 
-            font-weight: 500; transition: color 0.3s;
-        }
+        .nav-links a { text-decoration: none; color: #cbd5e1; font-size: 0.95rem; transition: 0.3s; }
         .nav-links a:hover { color: #ff00ff; }
 
         .nav-cta {
@@ -49,61 +41,56 @@
             50% { background-color: #7000ff; box-shadow: 0 0 20px #7000ff; }
         }
 
-        .container { max-width: 1000px; width: 100%; text-align: center; }
-
+        /* HEADER & CONTAINER */
+        .container { max-width: 1200px; width: 100%; text-align: center; }
         header h1 { 
             font-size: 2.5rem; margin-bottom: 10px;
             background: linear-gradient(90deg, #ff00ff, #00d2ff);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
+        header p { margin-bottom: 50px; color: #94a3b8; }
 
-        header p { margin-bottom: 40px; color: #94a3b8; }
-
-        /* GRID STYLES */
+        /* RE-STYLED 3-COLUMN GRID */
         .course-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr); 
+            grid-template-columns: repeat(3, 1fr); 
             gap: 25px;
             width: 100%;
-            max-width: 900px;
             margin: 0 auto;
         }
 
         .course-card {
             background: #1e293b;
-            padding: 25px;
+            padding: 30px;
             border-radius: 12px;
             border: 1px solid #334155;
             text-align: left;
-            position: relative; /* Required for the badge */
-            transition: transform 0.3s ease, border-color 0.3s ease;
+            position: relative;
+            transition: 0.3s;
         }
 
         .course-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
             border-color: #ff00ff;
         }
 
         .course-badge {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: rgba(255, 0, 255, 0.1);
-            color: #ff00ff;
-            font-size: 0.7rem;
-            padding: 4px 8px;
-            border-radius: 4px;
-            text-transform: uppercase;
-            font-weight: bold;
-            border: 1px solid #ff00ff;
+            position: absolute; top: 15px; right: 15px;
+            background: rgba(255, 0, 255, 0.1); color: #ff00ff;
+            font-size: 0.7rem; padding: 4px 8px; border-radius: 4px;
+            text-transform: uppercase; font-weight: bold; border: 1px solid #ff00ff;
         }
 
         .course-icon { font-size: 2rem; margin-bottom: 15px; display: block; }
-        .course-card h3 { color: #ff00ff; margin-bottom: 10px; }
+        .course-card h3 { color: #ff00ff; margin-bottom: 12px; font-size: 1.3rem; }
         .course-card p { color: #94a3b8; font-size: 0.9rem; line-height: 1.6; margin-bottom: 20px; }
         .btn-details { color: #00d2ff; text-decoration: none; font-weight: 600; font-size: 0.9rem; }
 
-        /* MOBILE RESPONSIVE */
+        /* MOBILE RESPONSIVE: Back to 1 column */
+        @media (max-width: 992px) {
+            .course-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
         @media (max-width: 768px) {
             .navbar { padding: 15px 5%; flex-wrap: wrap; justify-content: center; height: auto; }
             .nav-logo { width: 100%; text-align: center; margin-bottom: 10px; }
@@ -135,6 +122,7 @@
         </header>
 
         <section class="course-grid">
+            <!-- Card 1 -->
             <div class="course-card">
                 <span class="course-icon">💻</span>
                 <h3>Front-End Engineering</h3>
@@ -142,6 +130,7 @@
                 <a href="index.html" class="btn-details">Enroll Now →</a>
             </div>
 
+            <!-- Card 2 -->
             <div class="course-card">
                 <span class="course-icon">⚙️</span>
                 <h3>Back-End Architecture</h3>
@@ -149,6 +138,7 @@
                 <a href="index.html" class="btn-details">Enroll Now →</a>
             </div>
 
+            <!-- Card 3 -->
             <div class="course-card">
                 <span class="course-icon">🎨</span>
                 <h3>UI/UX Design Strategy</h3>
@@ -156,11 +146,20 @@
                 <a href="index.html" class="btn-details">Enroll Now →</a>
             </div>
 
+            <!-- Card 4 (NEW) -->
             <div class="course-card">
                 <span class="course-badge">Elite</span>
                 <span class="course-icon">🚀</span>
                 <h3>Full-Stack Mastery</h3>
-                <p>The complete blueprint. Combine Front-End and Back-End skills to build and deploy complex, scalable web apps.</p>
+                <p>The complete blueprint. Combine Front-End and Back-End skills to build and deploy complex web apps.</p>
+                <a href="index.html" class="btn-details">Enroll Now →</a>
+            </div>
+
+            <!-- Card 5 (RESTORED) -->
+            <div class="course-card">
+                <span class="course-icon">📊</span>
+                <h3>Project Management</h3>
+                <p>Learn Agile, Scrum, and leadership skills to manage high-performing tech teams effectively.</p>
                 <a href="index.html" class="btn-details">Enroll Now →</a>
             </div>
         </section>
