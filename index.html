@@ -25,6 +25,7 @@
             padding-top: 120px; 
         }
 
+        /* NAVBAR PATTERN */
         .navbar { 
             position: fixed; 
             top: 0;
@@ -69,6 +70,7 @@
 
         .nav-links a:hover { color: #ff00ff; }
 
+        /* CONTAINER & HEADER */
         .container { 
             max-width: 500px; 
             width: 100%; 
@@ -85,6 +87,7 @@
 
         header p { margin-bottom: 30px; color: #94a3b8; }
 
+        /* REGISTRATION BOX PATTERN */
         .registration-box { 
             background: #1e293b;
             padding: 30px;
@@ -113,6 +116,7 @@
             outline: none;
         }
 
+        /* BUTTON PATTERN (Color Cycling) */
         .btn-submit, .nav-cta {
             background: #ff00ff; 
             color: white !important; 
@@ -143,20 +147,18 @@
         @media (max-width: 768px) {
             .navbar {
                 padding: 15px 5%;
-                flex-wrap: wrap;       /* Allows items to stack */
+                flex-wrap: wrap;
                 justify-content: center; 
-                height: auto;          /* Grows to fit content */
+                height: auto;
             }
 
             .nav-logo {
-                width: 100%;           /* Centers logo on top */
+                width: 100%;
                 text-align: center;
                 margin-bottom: 10px;
             }
 
-            .nav-logo a {
-                font-size: 1.2rem;
-            }
+            .nav-logo a { font-size: 1.2rem; }
 
             .nav-links {
                 width: 100%;
@@ -164,20 +166,14 @@
                 gap: 15px;
             }
 
-            .nav-links a {
-                font-size: 0.85rem;
-            }
+            .nav-links a { font-size: 0.85rem; }
 
-            body { 
-                padding-top: 150px;    /* Extra space so navbar doesn't cover header */
-            }
+            body { padding-top: 150px; }
 
-            header h1 {
-                font-size: 1.8rem;
-            }
+            header h1 { font-size: 1.8rem; }
         }
 
-        /* SUCCESS MESSAGE STYLES */
+        /* SUCCESS MESSAGE PATTERN */
         .success-message { text-align: center; padding: 10px; animation: slideUp 0.5s ease-out; }
         .success-icon {
             font-size: 3rem; display: flex; justify-content: center; align-items: center; 
@@ -205,7 +201,7 @@
     <div class="container">
         <header>
             <h1>Level Up Your Tech Skills</h1>
-            <p>Join our comprehensive technical and leadership boot camps.</p>
+            <p>Join our comprehensive engineering and leadership boot camps.</p>
         </header>
 
         <section class="registration-box">
@@ -227,6 +223,7 @@
                         <option value="Front-End Engineering">Front-End Engineering</option>
                         <option value="Back-End Architecture">Back-End Architecture</option>
                         <option value="UI/UX Design Strategy">UI/UX Design Strategy</option>
+                        <option value="Full-Stack Mastery">Full-Stack Mastery</option>
                         <option value="Project Management">Project Management</option>
                     </select>
                 </div>
@@ -242,6 +239,7 @@
 
     <script>
         (function() {
+            // EmailJS Public Key
             emailjs.init("ogzWuNiymzaYa_-Es"); 
         })();
 
@@ -256,20 +254,14 @@
             const nameValue = nameInput.value.trim();
             const emailValue = emailInput.value.trim();
             const courseTrack = courseDropdown.options[courseDropdown.selectedIndex].text;
-            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-            let isValid = true;
+            // Pattern-based validation
             if (nameValue.split(' ').length < 2) {
                 alert("Please enter your full first and last name.");
-                isValid = false;
-            }
-            if (!emailPattern.test(emailValue)) {
-                alert("Please provide a valid email address.");
-                isValid = false;
+                return;
             }
 
-            if (!isValid) return;
-
+            // Send Email via EmailJS Pattern
             emailjs.send("service_xpgoy1a", "template_vzoj55a", {
                 user_name: nameValue,
                 user_email: emailValue,
@@ -279,6 +271,7 @@
                 (err) => alert("Failed to send: " + JSON.stringify(err))
             );
 
+            // Confetti Trigger Pattern
             confetti({
                 particleCount: 150,
                 spread: 70,
@@ -286,6 +279,7 @@
                 colors: ['#ff00ff', '#00d2ff', '#ffffff']
             });
 
+            // UI Success Transition Pattern
             registrationBox.style.opacity = '0';
             
             setTimeout(() => {
