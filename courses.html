@@ -14,7 +14,85 @@
             background-color: #0f172a; color: #f8fafc;
             display: flex; flex-direction: column; align-items: center; 
             min-height: 100vh; padding: 20px; padding-top: 120px; 
+            overflow-x: hidden;
         }
+
+        /* --- ENVELOPE ANIMATION OVERLAY --- */
+        #envelope-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #0f172a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            transition: opacity 1s ease;
+        }
+
+        .envelope {
+            position: relative;
+            width: 280px;
+            height: 180px;
+            background: #1e293b;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        .flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 140px solid transparent;
+            border-right: 140px solid transparent;
+            border-top: 100px solid #334155; 
+            transform-origin: top;
+            transition: transform 0.6s ease-in-out;
+            z-index: 3;
+        }
+
+        .letter {
+            position: absolute;
+            bottom: 10px;
+            left: 10%;
+            width: 80%;
+            height: 80%;
+            background: #fff;
+            border-radius: 5px;
+            transition: transform 0.8s ease-in-out;
+            z-index: 2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #0f172a;
+            font-weight: 900;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-align: center;
+            padding: 15px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        }
+
+        .envelope::before {
+            content: "";
+            position: absolute;
+            z-index: 4;
+            width: 0;
+            height: 0;
+            border-left: 140px solid transparent;
+            border-right: 140px solid transparent;
+            border-bottom: 90px solid #1e293b;
+            bottom: 0;
+        }
+
+        .open-flap { transform: rotateX(180deg); z-index: 1; }
+        .slide-letter { transform: translateY(-120px); }
+        .fade-out { opacity: 0; pointer-events: none; }
 
         /* NAVBAR STYLE */
         .navbar { 
@@ -50,7 +128,7 @@
         }
         header p { margin-bottom: 50px; color: #94a3b8; }
 
-        /* RE-STYLED 3-COLUMN GRID */
+        /* GRID */
         .course-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr); 
@@ -86,7 +164,6 @@
         .course-card p { color: #94a3b8; font-size: 0.9rem; line-height: 1.6; margin-bottom: 20px; }
         .btn-details { color: #00d2ff; text-decoration: none; font-weight: 600; font-size: 0.9rem; }
 
-        /* MOBILE RESPONSIVE */
         @media (max-width: 992px) {
             .course-grid { grid-template-columns: repeat(2, 1fr); }
         }
@@ -97,11 +174,20 @@
             .nav-links { width: 100%; justify-content: center; gap: 12px; }
             .course-grid { grid-template-columns: 1fr; }
             body { padding-top: 150px; }
-            header h1 { font-size: 2rem; }
         }
     </style>
 </head>
 <body>
+
+    <!-- ENVELOPE OVERLAY -->
+    <div id="envelope-wrapper">
+        <div class="envelope">
+            <div class="flap" id="flap"></div>
+            <div class="letter" id="letter">
+                COURSE CATALOGUE
+            </div>
+        </div>
+    </div>
 
     <nav class="navbar">
         <div class="nav-logo">
@@ -109,8 +195,8 @@
         </div> 
         <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
-            <li><a href="courses.html">Courses</a></li>
-            <li><a href="about.html">About</a></li> <!-- Fixed to point to about.html -->
+            <li><a href="courses.html" style="color: #ff00ff;">Courses</a></li>
+            <li><a href="about.html">About</a></li> 
             <li><a href="index.html" class="nav-cta">Register</a></li>
         </ul>
     </nav>
@@ -122,7 +208,6 @@
         </header>
 
         <section class="course-grid">
-            <!-- Card 1 -->
             <div class="course-card">
                 <span class="course-icon">💻</span>
                 <h3>Front-End Engineering</h3>
@@ -130,7 +215,6 @@
                 <a href="index.html" class="btn-details">Enroll Now →</a>
             </div>
 
-            <!-- Card 2 -->
             <div class="course-card">
                 <span class="course-icon">⚙️</span>
                 <h3>Back-End Architecture</h3>
@@ -138,7 +222,6 @@
                 <a href="index.html" class="btn-details">Enroll Now →</a>
             </div>
 
-            <!-- Card 3 -->
             <div class="course-card">
                 <span class="course-icon">🎨</span>
                 <h3>UI/UX Design Strategy</h3>
@@ -146,7 +229,6 @@
                 <a href="index.html" class="btn-details">Enroll Now →</a>
             </div>
 
-            <!-- Card 4 -->
             <div class="course-card">
                 <span class="course-badge">Elite</span>
                 <span class="course-icon">🚀</span>
@@ -155,7 +237,6 @@
                 <a href="index.html" class="btn-details">Enroll Now →</a>
             </div>
 
-            <!-- Card 5 -->
             <div class="course-card">
                 <span class="course-icon">📊</span>
                 <h3>Project Management</h3>
@@ -165,5 +246,27 @@
         </section>
     </div>
 
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            const flap = document.getElementById('flap');
+            const letter = document.getElementById('letter');
+            const wrapper = document.getElementById('envelope-wrapper');
+
+            setTimeout(() => {
+                flap.classList.add('open-flap');
+                
+                setTimeout(() => {
+                    letter.classList.add('slide-letter');
+                    
+                    setTimeout(() => {
+                        wrapper.classList.add('fade-out');
+                        setTimeout(() => {
+                            wrapper.style.display = 'none';
+                        }, 1000);
+                    }, 1200);
+                }, 600);
+            }, 800);
+        });
+    </script>
 </body>
 </html>
