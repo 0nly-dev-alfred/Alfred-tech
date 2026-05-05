@@ -73,6 +73,7 @@
             max-width: 500px; 
             width: 100%; 
             text-align: center; 
+            flex: 1; /* Pushes footer to bottom if page is short */
         }
 
         header h1 { 
@@ -135,11 +136,65 @@
             50% { background-color: #7000ff; box-shadow: 0 0 20px #7000ff; }
         }
 
+        /* --- FOOTER STYLES --- */
+        .main-footer {
+            width: 100%;
+            background: #070c18;
+            padding: 50px 10% 20px;
+            border-top: 1px solid #1e293b;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h4 {
+            color: #ff00ff;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .footer-section p, .footer-section li {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            list-style: none;
+        }
+
+        .footer-section ul li { margin-bottom: 10px; }
+
+        .footer-section a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover { color: #00d2ff; }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #1e293b;
+        }
+
+        .footer-bottom p {
+            font-size: 0.8rem;
+            color: #475569;
+        }
+
         @media (max-width: 768px) {
             .navbar { padding: 15px 5%; flex-wrap: wrap; justify-content: center; height: auto; }
             .nav-logo { width: 100%; text-align: center; margin-bottom: 10px; }
             .nav-links { width: 100%; justify-content: center; gap: 15px; }
             body { padding-top: 150px; }
+            .main-footer { padding: 40px 5% 20px; text-align: center; }
+            .footer-content { gap: 30px; }
         }
     </style>
 </head>
@@ -147,15 +202,12 @@
 
     <nav class="navbar">
         <div class="nav-logo">
-            <!-- Changed / to index.html -->
             <a href="index.html">ALFRED TECH<span>ACADEMY</span></a>
         </div>
         <ul class="nav-links">
-            <!-- Changed / to index.html -->
-            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html" style="color: #ff00ff;">Home</a></li>
             <li><a href="courses.html">Courses</a></li>
             <li><a href="about.html">About</a></li> 
-            <!-- Keeps the focus logic for the current page -->
             <li><a href="#" class="nav-cta" onclick="document.getElementById('full-name').focus(); return false;">Register</a></li>
         </ul>
     </nav>
@@ -192,6 +244,32 @@
         </section>
     </div>
 
+    <!-- NEW FOOTER SECTION -->
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Alfred Tech Academy</h4>
+                <p>Building the technical architects of the digital age. We transform aspiring developers into industry-ready leaders.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Sitemap</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="courses.html">Courses</a></li>
+                    <li><a href="about.html">About Founder</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Headquarters</h4>
+                <p>Ibadan, Oyo State<br>Nigeria</p>
+                <p style="margin-top: 10px;">Enquiries: academy@alfredtech.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Alfred Tech Academy. All rights reserved. Engineering Excellence from Ibadan.</p>
+        </div>
+    </footer>
+
     <script>
         (function() { emailjs.init("ogzWuNiymzaYa_-Es"); })();
 
@@ -218,10 +296,10 @@
             registrationBox.style.opacity = '0';
             setTimeout(() => {
                 registrationBox.innerHTML = `
-                    <div class="success-message">
-                        <div class="success-icon">🔑</div>
+                    <div class="success-message" style="text-align:center;">
+                        <div class="success-icon" style="font-size: 3rem;">🔑</div>
                         <h2 style="color: #ff00ff; margin-bottom: 15px;">Access Granted</h2>
-                        <p style="margin-bottom: 15px;">Check <strong>${emailValue}</strong> for details.</p>
+                        <p style="margin-bottom: 15px; color: #cbd5e1;">Check <strong>${emailValue}</strong> for details.</p>
                         <button onclick="window.location.reload()" class="btn-submit">Close</button>
                     </div>
                 `;
