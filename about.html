@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Mission | Alfred Tech Academy</title>
+    <title>About the Founder | Alfred Tech Academy</title>
     <style>
         * { 
             margin: 0; padding: 0; box-sizing: border-box; 
@@ -35,76 +35,58 @@
             box-shadow: 0 0 15px rgba(255, 0, 255, 0.3);
         }
 
-        /* --- HERO SECTION --- */
-        .about-hero {
-            padding: 100px 10%; text-align: center;
-            background: radial-gradient(circle at top, rgba(0, 210, 255, 0.1), transparent);
+        /* --- SECTIONS --- */
+        .section-container { padding: 40px 10%; max-width: 1200px; margin: 0 auto; }
+        .section-title { color: #ff00ff; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 3px; font-weight: bold; margin-bottom: 15px; display: block; }
+        
+        /* --- FOUNDER BOX --- */
+        .founder-box {
+            display: grid; grid-template-columns: 1fr 1.5fr; gap: 60px;
+            align-items: center; background: #1e293b; padding: 50px;
+            border-radius: 30px; border: 1px solid rgba(0, 210, 255, 0.2);
+            margin: 40px 0;
         }
 
-        .about-hero h1 { 
-            font-size: 4rem; margin-bottom: 20px;
-            background: linear-gradient(90deg, #ff00ff, #00d2ff);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        .founder-img-container {
+            width: 100%; height: 450px; border-radius: 20px; overflow: hidden;
+            background: #0f172a; border: 2px solid #ff00ff; 
+            box-shadow: 0 10px 30px rgba(255, 0, 255, 0.2);
         }
 
-        .about-hero p { font-size: 1.3rem; color: #94a3b8; max-width: 900px; margin: 0 auto; }
-
-        /* --- SECTION STYLING --- */
-        .section-container { padding: 80px 10%; max-width: 1200px; margin: 0 auto; }
-
-        .section-title {
-            color: #ff00ff; font-size: 0.9rem; text-transform: uppercase;
-            letter-spacing: 3px; font-weight: bold; margin-bottom: 15px; display: block;
+        .founder-actual-img {
+            width: 100%; height: 100%; object-fit: cover; display: block;
         }
 
-        h2 { font-size: 2.5rem; margin-bottom: 30px; }
+        .founder-info h2 { font-size: 2.2rem; margin-bottom: 5px; }
+        .founder-tag { color: #00d2ff; font-weight: 600; display: block; margin-bottom: 20px; }
 
-        /* --- CORE VALUES GRID --- */
-        .values-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px; margin-top: 50px;
+        /* --- STORY SECTION --- */
+        .story-section {
+            background: rgba(30, 41, 59, 0.3); padding: 50px;
+            border-radius: 30px; border-left: 5px solid #ff00ff; margin-top: 60px;
+        }
+        .story-content blockquote {
+            font-size: 1.3rem; font-style: italic; color: #00d2ff;
+            margin: 30px 0; padding-left: 20px; border-left: 3px solid #ff00ff;
         }
 
-        .value-card {
-            background: #1e293b; padding: 40px; border-radius: 20px;
-            border-left: 4px solid #ff00ff;
-        }
-
-        .value-card h3 { margin-bottom: 15px; color: #00d2ff; }
-
-        /* --- DETAILED PHILOSOPHY --- */
-        .mission-split {
-            display: flex; gap: 60px; align-items: flex-start; margin-top: 100px;
-        }
-
-        .mission-content { flex: 1; }
+        /* --- STATS --- */
         .mission-stats {
-            flex: 0 0 300px; background: linear-gradient(135deg, #1e293b, #0f172a);
-            padding: 40px; border-radius: 20px; border: 1px solid #334155;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px; margin-top: 50px;
         }
-
-        .stat-item { margin-bottom: 30px; }
+        .stat-card { background: #1e293b; padding: 30px; border-radius: 20px; text-align: center; border: 1px solid #334155; }
         .stat-number { display: block; font-size: 2.5rem; font-weight: bold; color: #ff00ff; }
         .stat-label { color: #94a3b8; font-size: 0.9rem; }
 
         /* --- FOOTER --- */
-        footer {
-            text-align: center; padding: 60px; color: #475569;
-            border-top: 1px solid #1e293b; background: #070c18;
-        }
+        footer { text-align: center; padding: 60px; color: #475569; border-top: 1px solid #1e293b; background: #070c18; }
 
         /* --- RESPONSIVE --- */
         @media (max-width: 992px) {
-            .mission-split { flex-direction: column; }
-            .mission-stats { width: 100%; display: flex; justify-content: space-around; }
-        }
-
-        @media (max-width: 768px) {
-            .navbar { padding: 15px 5%; flex-wrap: wrap; justify-content: center; height: auto; }
-            .nav-logo { width: 100%; text-align: center; margin-bottom: 10px; }
-            .nav-links { width: 100%; justify-content: center; gap: 12px; }
-            .about-hero h1 { font-size: 2.8rem; }
-            .mission-stats { flex-direction: column; text-align: center; }
+            .founder-box { grid-template-columns: 1fr; text-align: center; padding: 30px; }
+            .founder-img-container { height: 350px; max-width: 350px; margin: 0 auto; }
+            .story-section { padding: 30px; }
         }
     </style>
 </head>
@@ -117,62 +99,60 @@
         <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
             <li><a href="courses.html">Courses</a></li>
-            <li><a href="about.html">About</a></li>
+            <li><a href="about.html" style="color: #ff00ff;">About</a></li>
             <li><a href="index.html" class="nav-cta">Join Cohort</a></li>
         </ul>
     </nav>
 
-    <header class="about-hero">
-        <span class="section-title">Established 2026</span>
-        <h1>We Don't Just Teach.<br>We Engineer Careers.</h1>
-        <p>Bridging the gap between academic theory and industry reality. Alfred Tech Academy provides a high-intensity environment where aspiring developers transform into technical leaders.</p>
-    </header>
-
     <div class="section-container">
         
-        <div class="mission-split">
-            <div class="mission-content">
-                <span class="section-title">The Mission</span>
-                <h2>Why We Exist</h2>
-                <p>The tech industry moves at light speed. Traditional education often lags years behind the latest frameworks and methodologies. We were founded to solve this problem.</p>
-                <br>
-                <p>Based in the vibrant tech ecosystem of <strong>Ibadan</strong>, our philosophy is built on **Applied Mastery**. We believe that 100 hours of coding on real-world projects is worth more than 1,000 hours of watching tutorials.</p>
+        <!-- MEET THE FOUNDER -->
+        <section class="founder-box">
+            <div class="founder-img-container">
+                <!-- Using your exact filename and .png extension -->
+                <img src="founders image.png" alt="Adejumo Samuel Ademola" class="founder-actual-img">
             </div>
-            
-            <div class="mission-stats">
-                <div class="stat-item">
-                    <span class="stat-number">12+</span>
-                    <span class="stat-label">Real-World Projects per Track</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">24/7</span>
-                    <span class="stat-label">Community Support Access</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">100%</span>
-                    <span class="stat-label">Portfolio Focused Curriculum</span>
-                </div>
-            </div>
-        </div>
 
-        <section style="margin-top: 120px;">
-            <span class="section-title">The Alfred Standard</span>
-            <h2>Our Core Values</h2>
-            <div class="values-grid">
-                <div class="value-card">
-                    <h3>Radical Transparency</h3>
-                    <p>We provide honest code reviews and direct feedback. No sugar-coating, just continuous improvement and growth.</p>
-                </div>
-                <div class="value-card">
-                    <h3>Industry Relevance</h3>
-                    <p>Our curriculum is updated monthly to reflect the exact tech stacks being hired for in Nigeria and globally.</p>
-                </div>
-                <div class="value-card">
-                    <h3>Collaborative Spirit</h3>
-                    <p>Software is a team sport. We emphasize pair programming and Git-based collaboration from Day 1.</p>
-                </div>
+            <div class="founder-info">
+                <span class="section-title">The Visionary</span>
+                <h2>Adejumo Samuel Ademola</h2>
+                <span class="founder-tag">Founder & Lead Digital Architect</span>
+                <p>As a specialist in Full-Stack development and digital systems, Samuel has spent years mastering the intersection of hardware logic and software execution. From his base in Ibadan, he has built a reputation for creating high-performance digital solutions.</p>
+                <br>
+                <p>He founded Alfred Tech Academy to democratize high-level technical education, ensuring that the next generation of African developers learns to engineer with purpose.</p>
             </div>
         </section>
+
+        <!-- THE STORY -->
+        <section class="story-section">
+            <span class="section-title">The Origin Story</span>
+            <h2>The Ibadan Midnight</h2>
+            <div class="story-content">
+                <p>The story of this academy began long before the first student enrolled. It began with <strong>Adejumo Samuel Ademola</strong> hunched over an HP laptop, navigating the friction between ambition and limited resources. In the quiet hours of 2:00 AM in Ibadan—long after the city noise had faded—Samuel was self-teaching the complexities of JavaScript, the precision of Photoshop, and the logic of audio engineering.</p>
+                
+                <blockquote>
+                    "I realized that the gap between a student and an expert isn't talent—it’s the willingness to stay awake and keep clicking 'Refresh' until the code finally turns green."
+                </blockquote>
+
+                <p>Every technical hurdle—from debugging complex modules to troubleshooting hardware—became a brick in the foundation of Alfred Tech. Samuel built this academy to provide the exact roadmap he wished he had: a path forged in grit, refined by experience, and designed for those ready to lead the tech revolution.</p>
+            </div>
+        </section>
+
+        <!-- QUICK STATS -->
+        <div class="mission-stats">
+            <div class="stat-card">
+                <span class="stat-number">12+</span>
+                <span class="stat-label">Real-World Projects</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">24/7</span>
+                <span class="stat-label">Community Support</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">100%</span>
+                <span class="stat-label">Practical Mastery</span>
+            </div>
+        </div>
 
     </div>
 
