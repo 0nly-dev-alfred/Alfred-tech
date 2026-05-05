@@ -17,12 +17,9 @@
         body { 
             background-color: #0f172a;
             color: #f8fafc;
-            display: flex;
-            flex-direction: column;
-            align-items: center; 
+            /* Switch to block for natural scrolling */
+            display: block; 
             min-height: 100vh; 
-            padding: 20px; 
-            padding-top: 120px; 
         }
 
         /* NAVBAR */
@@ -71,9 +68,10 @@
         /* CONTAINER & HEADER */
         .container { 
             max-width: 500px; 
-            width: 100%; 
+            width: 90%; 
+            /* Centering the container with margins */
+            margin: 140px auto 80px; 
             text-align: center; 
-            flex: 1; /* Pushes footer to bottom if page is short */
         }
 
         header h1 { 
@@ -136,26 +134,26 @@
             50% { background-color: #7000ff; box-shadow: 0 0 20px #7000ff; }
         }
 
-        /* --- FOOTER STYLES --- */
+        /* --- UPDATED RESPONSIVE FOOTER --- */
         .main-footer {
             width: 100%;
             background: #070c18;
-            padding: 50px 10% 20px;
+            padding: 60px 10% 30px;
             border-top: 1px solid #1e293b;
-            margin-top: 60px;
         }
 
         .footer-content {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            /* Stacks on mobile, 3 columns on desktop */
+            grid-template-columns: 1fr;
             gap: 40px;
             margin-bottom: 40px;
         }
 
         .footer-section h4 {
             color: #ff00ff;
-            margin-bottom: 20px;
-            font-size: 1.1rem;
+            margin-bottom: 15px;
+            font-size: 1rem;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
@@ -188,13 +186,22 @@
             color: #475569;
         }
 
+        /* MOBILE OVERRIDES */
         @media (max-width: 768px) {
-            .navbar { padding: 15px 5%; flex-wrap: wrap; justify-content: center; height: auto; }
+            .navbar { padding: 15px 5%; flex-wrap: wrap; justify-content: center; }
             .nav-logo { width: 100%; text-align: center; margin-bottom: 10px; }
-            .nav-links { width: 100%; justify-content: center; gap: 15px; }
-            body { padding-top: 150px; }
+            .nav-links { gap: 15px; }
+            
+            .container { margin-top: 160px; }
+            
             .main-footer { padding: 40px 5% 20px; text-align: center; }
-            .footer-content { gap: 30px; }
+        }
+
+        /* DESKTOP FOOTER GRID */
+        @media (min-width: 769px) {
+            .footer-content {
+                grid-template-columns: 2fr 1fr 1fr;
+            }
         }
     </style>
 </head>
@@ -244,12 +251,11 @@
         </section>
     </div>
 
-    <!-- NEW FOOTER SECTION -->
     <footer class="main-footer">
         <div class="footer-content">
             <div class="footer-section">
                 <h4>Alfred Tech Academy</h4>
-                <p>Building the technical architects of the digital age. We transform aspiring developers into industry-ready leaders.</p>
+                <p>Building the technical architects of the digital age. We transform aspiring developers into industry-ready leaders from our base in Ibadan.</p>
             </div>
             <div class="footer-section">
                 <h4>Sitemap</h4>
@@ -260,13 +266,13 @@
                 </ul>
             </div>
             <div class="footer-section">
-                <h4>Headquarters</h4>
-                <p>Ibadan, Oyo State<br>Nigeria</p>
-                <p style="margin-top: 10px;">Enquiries: academy@alfredtech.com</p>
+                <h4>Contact</h4>
+                <p>Ibadan, Nigeria</p>
+                <p style="margin-top: 10px;">academy@alfredtech.com</p>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2026 Alfred Tech Academy. All rights reserved. Engineering Excellence from Ibadan.</p>
+            <p>&copy; 2026 Alfred Tech Academy. All rights reserved.</p>
         </div>
     </footer>
 
