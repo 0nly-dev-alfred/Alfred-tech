@@ -13,7 +13,7 @@
         body { 
             background-color: #0f172a; color: #f8fafc;
             line-height: 1.6; padding-top: 70px;
-            overflow-x: hidden; /* Prevents scrollbars during vault animation */
+            overflow-x: hidden; 
         }
 
         /* --- VAULT (SAFEBOX) ANIMATION --- */
@@ -24,7 +24,7 @@
             width: 100%;
             height: 100%;
             z-index: 2000;
-            pointer-events: none;
+            pointer-events: none; /* Allows clicks to pass through once doors move */
         }
 
         .vault-door {
@@ -35,6 +35,7 @@
             background: #1e293b; 
             border: 1px solid #334155;
             transition: transform 1.2s cubic-bezier(0.7, 0, 0.3, 1);
+            pointer-events: all; /* Blocks clicks while vault is closed */
         }
 
         .door-left { left: 0; border-right: 4px solid #ff00ff; }
@@ -60,8 +61,8 @@
         }
 
         /* State when vault triggers "Open" */
-        .vault-open .door-left { transform: translateX(-100%); }
-        .vault-open .door-right { transform: translateX(100%); }
+        .vault-open .door-left { transform: translateX(-100%); pointer-events: none; }
+        .vault-open .door-right { transform: translateX(100%); pointer-events: none; }
         .vault-open .vault-dial { opacity: 0; transform: translate(-50%, -50%) scale(0.2); }
 
         /* --- NAVIGATION --- */
@@ -73,8 +74,14 @@
         }
         .nav-logo a { font-size: 1.2rem; font-weight: bold; color: white; text-decoration: none; }
         .nav-logo span { color: #ff00ff; }
-        .nav-links { display: flex; list-style: none; gap: 15px; }
-        .nav-links a { text-decoration: none; color: #cbd5e1; font-size: 0.85rem; }
+        .nav-links { display: flex; list-style: none; gap: 15px; align-items: center; }
+        .nav-links a { text-decoration: none; color: #cbd5e1; font-size: 0.85rem; transition: 0.3s; }
+        .nav-links a:hover { color: #ff00ff; }
+
+        .nav-cta {
+            background: #ff00ff; color: white !important; padding: 6px 12px;
+            border-radius: 6px; font-weight: bold; font-size: 0.8rem !important;
+        }
 
         /* --- HERO --- */
         .about-hero {
@@ -83,19 +90,17 @@
         }
         .about-hero h1 { 
             font-size: clamp(1.8rem, 7vw, 3.2rem); 
-            line-height: 1.2;
-            margin-bottom: 20px; 
+            line-height: 1.2; margin-bottom: 20px; 
             background: linear-gradient(90deg, #ff00ff, #00d2ff); 
             -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
             font-weight: 800;
         }
-        .about-hero p { font-size: 1.05rem; color: #94a3b8; max-width: 600px; margin: 0 auto; line-height: 1.5; }
+        .about-hero p { font-size: 1.05rem; color: #94a3b8; max-width: 600px; margin: 0 auto; }
 
-        /* --- CONTAINERS --- */
+        /* --- FOUNDER BOX --- */
         .section-container { padding: 30px 5%; max-width: 1100px; margin: 0 auto; }
         .section-title { color: #ff00ff; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; font-weight: bold; margin-bottom: 10px; display: block; }
 
-        /* --- FOUNDER BOX --- */
         .founder-box {
             display: grid; grid-template-columns: 1fr; gap: 30px;
             background: #1e293b; padding: 30px 20px;
@@ -117,7 +122,7 @@
         }
 
         @keyframes floatAndGlow {
-            0%, 100% { transform: translateY(0px); box-shadow: 0 10px 20px rgba(255, 0, 255, 0.2); border-color: #ff00ff; }
+            0%, 100% { transform: translateY(0px); box-shadow: 0 10px 20px rgba(255, 0, 255, 0.2); }
             50% { transform: translateY(-20px); box-shadow: 0 25px 50px rgba(0, 210, 255, 0.5); border-color: #00d2ff; }
         }
 
@@ -134,7 +139,6 @@
             border-radius: 20px; border-left: 4px solid #ff00ff; margin-top: 30px;
         }
         .story-section h2 { font-size: 1.6rem; margin-bottom: 15px; }
-        .story-content p { font-size: 0.95rem; color: #cbd5e1; margin-bottom: 15px; }
         .story-content blockquote {
             font-size: 1.1rem; font-style: italic; color: #00d2ff;
             margin: 20px 0; padding-left: 15px; border-left: 3px solid #ff00ff;
@@ -142,9 +146,7 @@
         }
 
         /* --- STATS GRID --- */
-        .stats-grid { 
-            display: grid; grid-template-columns: 1fr; gap: 15px; margin-top: 30px; 
-        }
+        .stats-grid { display: grid; grid-template-columns: 1fr; gap: 15px; margin-top: 30px; }
         .stat-card { background: #0f172a; padding: 20px; border-radius: 15px; text-align: center; border: 1px solid #1e293b; }
         .stat-card h3 { font-size: 2rem; color: #ff00ff; margin-bottom: 5px; }
         .stat-card p { font-size: 0.85rem; color: #94a3b8; text-transform: uppercase; }
@@ -153,15 +155,11 @@
             body { padding-top: 100px; }
             .navbar { padding: 20px 10%; }
             .nav-logo a { font-size: 1.5rem; }
-            .nav-links { gap: 30px; }
-            .nav-links a { font-size: 0.95rem; }
-            .section-container { padding: 60px 10%; }
+            .nav-links { gap: 25px; }
             .founder-box { grid-template-columns: 1fr 1.5fr; padding: 50px; text-align: left; gap: 60px; }
             .founder-info { text-align: left; }
-            .founder-img-container { max-width: 100%; height: 450px; }
             .stats-grid { grid-template-columns: repeat(3, 1fr); }
             .about-hero { padding: 100px 10%; }
-            .story-section { padding: 50px; }
         }
 
         footer { text-align: center; padding: 40px 5%; color: #475569; font-size: 0.8rem; border-top: 1px solid #1e293b; margin-top: 40px; }
@@ -180,7 +178,9 @@
         <div class="nav-logo"><a href="index.html">ALFRED TECH<span>ACADEMY</span></a></div>
         <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
+            <li><a href="courses.html">Courses</a></li>
             <li><a href="about.html" style="color: #ff00ff;">About</a></li>
+            <li><a href="index.html" class="nav-cta">Register</a></li>
         </ul>
     </nav>
 
@@ -193,6 +193,7 @@
     <div class="section-container">
         <section class="founder-box">
             <div class="founder-img-container">
+                <!-- Ensure the image filename matches exactly on your GitHub -->
                 <img src="founders image.png" alt="Adejumo Samuel Ademola" class="founder-actual-img">
             </div>
             <div class="founder-info">
@@ -228,21 +229,18 @@
     </footer>
 
     <script>
-        // Trigger the vault opening when the page content is ready
         window.addEventListener('DOMContentLoaded', () => {
             const vault = document.getElementById('vault-loader');
             
-            // Wait 500ms to show the locked vault, then open it
             setTimeout(() => {
                 vault.classList.add('vault-open');
                 
-                // Hide the loader entirely after animation finishes (1.2s)
+                // Remove from DOM after animation so it doesn't interfere with the page
                 setTimeout(() => {
                     vault.style.display = 'none';
                 }, 1200);
             }, 500);
         });
     </script>
-
 </body>
 </html>
