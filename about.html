@@ -19,48 +19,32 @@
         /* --- VAULT (SAFEBOX) ANIMATION --- */
         #vault-loader {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 2000;
-            pointer-events: none; /* Allows clicks to pass through once doors move */
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 2000; pointer-events: none;
         }
 
         .vault-door {
             position: absolute;
-            top: 0;
-            width: 50%;
-            height: 100%;
+            top: 0; width: 50%; height: 100%;
             background: #1e293b; 
             border: 1px solid #334155;
             transition: transform 1.2s cubic-bezier(0.7, 0, 0.3, 1);
-            pointer-events: all; /* Blocks clicks while vault is closed */
+            pointer-events: all;
         }
 
         .door-left { left: 0; border-right: 4px solid #ff00ff; }
         .door-right { right: 0; border-left: 4px solid #ff00ff; }
 
         .vault-dial {
-            width: 100px;
-            height: 100px;
-            background: #0f172a;
-            border: 5px solid #ff00ff;
-            border-radius: 50%;
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 2001;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            width: 100px; height: 100px;
+            background: #0f172a; border: 5px solid #ff00ff;
+            border-radius: 50%; position: absolute;
+            left: 50%; top: 50%; transform: translate(-50%, -50%);
+            z-index: 2001; display: flex; align-items: center; justify-content: center;
             box-shadow: 0 0 30px rgba(255, 0, 255, 0.6);
-            font-size: 2.5rem;
-            transition: opacity 0.5s ease, transform 0.8s ease;
+            font-size: 2.5rem; transition: opacity 0.5s ease, transform 0.8s ease;
         }
 
-        /* State when vault triggers "Open" */
         .vault-open .door-left { transform: translateX(-100%); pointer-events: none; }
         .vault-open .door-right { transform: translateX(100%); pointer-events: none; }
         .vault-open .vault-dial { opacity: 0; transform: translate(-50%, -50%) scale(0.2); }
@@ -129,9 +113,11 @@
         @keyframes slowZoom { from { transform: scale(1); } to { transform: scale(1.1); } }
 
         .founder-info { text-align: center; }
-        .founder-info h2 { font-size: 1.6rem; margin-bottom: 5px; color: #fff; }
-        .founder-tag { color: #00d2ff; font-weight: 600; display: block; margin-bottom: 15px; font-size: 0.85rem; }
-        .founder-info p { font-size: 0.95rem; color: #cbd5e1; margin-bottom: 10px; }
+        .founder-info h2 { font-size: 1.8rem; margin-bottom: 5px; color: #fff; }
+        .founder-tag { color: #00d2ff; font-weight: 600; display: block; margin-bottom: 15px; font-size: 0.9rem; }
+        
+        .skill-tags { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin: 15px 0; }
+        .tag { background: rgba(0, 210, 255, 0.1); border: 1px solid #00d2ff; color: #00d2ff; padding: 4px 12px; border-radius: 6px; font-size: 0.75rem; font-weight: bold; }
 
         /* --- STORY SECTION --- */
         .story-section {
@@ -158,6 +144,7 @@
             .nav-links { gap: 25px; }
             .founder-box { grid-template-columns: 1fr 1.5fr; padding: 50px; text-align: left; gap: 60px; }
             .founder-info { text-align: left; }
+            .skill-tags { justify-content: flex-start; }
             .stats-grid { grid-template-columns: repeat(3, 1fr); }
             .about-hero { padding: 100px 10%; }
         }
@@ -167,7 +154,6 @@
 </head>
 <body>
 
-    <!-- SAFEBOX / VAULT LOADER -->
     <div id="vault-loader">
         <div class="vault-dial">🔒</div>
         <div class="vault-door door-left"></div>
@@ -187,21 +173,29 @@
     <header class="about-hero">
         <span class="section-title">The Mission</span>
         <h1>Providing the high-intensity environment where aspiring developers transform into technical leaders.</h1>
-        <p>Alfred Tech Academy is where theory meets the grind. We don't just teach coding—we build architects.</p>
+        <p>Alfred Tech Academy is where theory meets the grind. We don't just teach coding—we build software architects.</p>
     </header>
 
     <div class="section-container">
         <section class="founder-box">
             <div class="founder-img-container">
-                <!-- Ensure the image filename matches exactly on your GitHub -->
                 <img src="founders image.png" alt="Adejumo Samuel Ademola" class="founder-actual-img">
             </div>
             <div class="founder-info">
-                <span class="section-title">Founder</span>
+                <span class="section-title">The Architect</span>
                 <h2>Adejumo Samuel Ademola</h2>
-                <span class="founder-tag">Lead Digital Architect</span>
-                <p>As a specialist in Full-Stack development, Samuel has spent years mastering the intersection of hardware logic and software execution.</p>
-                <p>He founded Alfred Tech Academy to ensure the next generation of Nigerian developers learns to engineer with purpose and precision.</p>
+                <span class="founder-tag">Lead Full-Stack Engineer & Technical Consultant</span>
+                
+                <p>Samuel is a specialist in crafting high-performance web systems and scalable digital infrastructure. With a background rooted in **complex system diagnostics**, he approaches software development with a rigorous, logic-first methodology.</p>
+                
+                <div class="skill-tags">
+                    <div class="tag">MERN Stack</div>
+                    <div class="tag">Backend Architecture</div>
+                    <div class="tag">API Integration</div>
+                    <div class="tag">Technical Leadership</div>
+                </div>
+
+                <p>He founded Alfred Tech Academy to bridge the gap between amateur coding and professional engineering—giving students the exact practical roadmap he used to master full-stack development while navigating the Nigerian tech landscape.</p>
             </div>
         </section>
 
@@ -209,17 +203,23 @@
             <span class="section-title">The Origin Story</span>
             <h2>The Ibadan Midnight</h2>
             <div class="story-content">
-                <p>The academy began with <strong>Samuel</strong> hunched over an HP laptop at 2:00 AM, teaching himself the depths of JavaScript and Photoshop amidst the challenges of limited resources.</p>
+                <p>The academy began with <strong>Samuel</strong> hunched over an HP laptop at 2:00 AM, teaching himself the depths of JavaScript and asynchronous logic amidst the challenges of limited resources.</p>
                 <blockquote>
                     "The gap between a student and an expert isn't talent—it’s the willingness to stay awake until the code finally turns green."
                 </blockquote>
-                <p>Every technical hurdle became a brick in the foundation of Alfred Tech. This is the roadmap he wished he had: a path forged in grit, designed for those ready to lead.</p>
+                <p>Every technical hurdle became a brick in the foundation of Alfred Tech. This is a path forged in grit, designed for those ready to lead the next generation of African engineering.</p>
             </div>
+        </section>
+
+        <section class="story-section" style="border-left-color: #00d2ff; background: rgba(0, 210, 255, 0.05); margin-top: 20px;">
+            <span class="section-title" style="color: #00d2ff;">Our Philosophy</span>
+            <h2>Engineering, Not Just Coding</h2>
+            <p>At Alfred Tech, we believe that understanding **data flow** and **asynchronous logic** is just as important as writing clean syntax. We train our students to be versatile engineers—the kind of developers who can build complex landing pages for industrial services and script advanced automation tools from scratch.</p>
         </section>
 
         <div class="stats-grid">
             <div class="stat-card"><h3>12+</h3><p>Real-World Projects</p></div>
-            <div class="stat-card"><h3>24/7</h3><p>Community Support</p></div>
+            <div class="stat-card"><h3>24/7</h3><p>Technical Support</p></div>
             <div class="stat-card"><h3>100%</h3><p>Practical Mastery</p></div>
         </div>
     </div>
@@ -231,11 +231,8 @@
     <script>
         window.addEventListener('DOMContentLoaded', () => {
             const vault = document.getElementById('vault-loader');
-            
             setTimeout(() => {
                 vault.classList.add('vault-open');
-                
-                // Remove from DOM after animation so it doesn't interfere with the page
                 setTimeout(() => {
                     vault.style.display = 'none';
                 }, 1200);
