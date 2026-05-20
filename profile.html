@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Profile | Alfred Tech Academy</title>
+    <style>
+        * { 
+            margin: 0; padding: 0; box-sizing: border-box; 
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body { 
+            background-color: #0f172a; color: #f8fafc;
+            min-height: 100vh; overflow-x: hidden;
+        }
+
+        /* --- NAVBAR --- */
+        .navbar { 
+            position: fixed; top: 0; left: 0; width: 100%;
+            display: flex; justify-content: space-between; align-items: center; 
+            padding: 20px 10%; background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(10px); z-index: 1000; border-bottom: 1px solid #334155; 
+        }
+
+        .nav-logo a { 
+            font-size: 1.5rem; font-weight: bold; color: white; 
+            text-decoration: none; letter-spacing: 1px; 
+        }
+
+        .nav-logo span { color: #ff00ff; }
+
+        .nav-right { display: flex; align-items: center; gap: 15px; }
+
+        .btn-logout {
+            background: transparent; color: #ef4444;
+            border: 1px solid #ef4444; padding: 6px 14px;
+            border-radius: 6px; font-size: 0.85rem; font-weight: bold;
+            cursor: pointer; transition: background 0.3s;
+        }
+
+        .btn-logout:hover { background: rgba(239, 68, 68, 0.1); }
+
+        /* --- MAIN CONTENT --- */
+        .main { 
+            max-width: 600px; width: 90%; 
+            margin: 130px auto 80px; 
+        }
+
+        header { text-align: center; margin-bottom: 30px; }
+
+        header h1 { 
+            font-size: 2.2rem; margin-bottom: 10px;
+            background: linear-gradient(90deg, #ff00ff, #00d2ff);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+
+        header p { color: #94a3b8; font-size: 0.95rem; }
+
+        /* --- PROFILE BOX --- */
+        .profile-box {
+            background: #1e293b; padding: 30px;
+            border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+            opacity: 0; transform: translateY(20px);
+            animation: fadeInUp 0.6s forwards ease-out;
+        }
+
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .input-group { margin-bottom: 15px; }
+
+        .input-group label { 
+            display: block; margin-bottom: 5px; 
+            font-size: 0.9rem; color: #cbd5e1; 
+        }
+
+        .input-group input, .input-group textarea {
+            width: 100%; padding: 12px; border-radius: 6px; 
+            border: 1px solid #334155; background: #0f172a; 
+            color: white; outline: none; transition: border-color 0.3s;
+            font-family: 'Segoe UI', sans-serif; font-size: 0.95rem;
+        }
+
+        .input-group textarea { resize: vertical; min-height: 90px; }
+
+        .input-group input:focus, .input-group textarea:focus { border-color: #ff00ff; }
+
+        .input-group input:disabled {
+            opacity: 0.5; cursor: not-allowed;
+        }
+
+        .field-note {
+            font-size: 0.75rem; color: #475569; margin-top: 4px;
+        }
+
+        /* --- SUCCESS MESSAGE --- */
+        .success-msg {
+            display: none;
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid #22c55e;
+            color: #22c55e;
+            padding: 10px 14px; border-radius: 6px;
+            font-size: 0.85rem; margin-bottom: 15px; text-align: center;
+        }
+
+        .success-msg.visible { display: block; }
+
+        /* --- BUTTONS --- */
+        .btn-submit {
+            background: #ff00ff; color: white; border: none; 
+            border-radius: 6px; font-weight: bold; cursor: pointer;
+            width: 100%; padding: 14px; font-size: 1rem; margin-top: 10px;
+            animation: colorCycle 3s infinite ease-in-out;
+        }
+
+        .btn-dashboard {
+            display: block; text-align: center; text-decoration: none;
+            color: #94a3b8; margin-top: 15px; font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .btn-dashboard:hover { color: #ff00ff; }
+
+        @keyframes colorCycle { 
+            0%, 100% { background-color: #ff00ff; box-shadow: 0 0 5px #ff00ff; }
+            50% { background-color: #7000ff; box-shadow: 0 0 20px #7000ff; }
+        }
+
+        @media (max-width: 768px) {
+            .navbar { padding: 15px 5%; flex-direction: column; gap: 15px; }
+            .main { margin-top: 160px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-logo">
+            <a href="index.html">ALFRED TECH<span>ACADEMY</span></a>
+        </div>
+        <div class="nav-right">
+            <button class="btn-logout" id="logoutBtn">Logout</button>
+        </div>
+    </nav>
+
+    <div class="main">
+        <header>
+            <h1>Your Profile</h1>
+            <p>Fill in your details and keep them up to date.</p>
+        </header>
+
+        <div class="profile-box">
+            <div class="success-msg" id="success-msg">Profile saved successfully!</div>
+            <form id="profileForm">
+                <div class="input-group">
+                    <label>Full Name</label>
+                    <input type="text" id="profile-name" placeholder="John Doe" required>
+                </div>
+                <div class="input-group">
+                    <label>Email Address</label>
+                    <input type="email" id="profile-email" disabled>
+                    <p class="field-note">Email cannot be changed.</p>
+                </div>
+                <div class="input-group">
+                    <label>Enrolled Track</label>
+                    <input type="text" id="profile-course" disabled>
+                    <p class="field-note">Track is set during registration.</p>
+                </div>
+                <div class="input-group">
+                    <label>Phone Number</label>
+                    <input type="tel" id="profile-phone" placeholder="+234 000 000 0000">
+                </div>
+                <div class="input-group">
+                    <label>Location</label>
+                    <input type="text" id="profile-location" placeholder="Ibadan, Nigeria">
+                </div>
+                <div class="input-group">
+                    <label>Bio</label>
+                    <textarea id="profile-bio" placeholder="Tell us a little about yourself..."></textarea>
+                </div>
+                <button type="submit" class="btn-submit">Save Profile</button>
+                <a href="dashboard.html" class="btn-dashboard">Skip for now → Go to Dashboard</a>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // --- LOAD USER DATA ---
+        const currentEmail = localStorage.getItem('currentUser');
+        const users = JSON.parse(localStorage.getItem('users')) || [];
+        const userIndex = users.findIndex(u => u.email === currentEmail);
+
+        if (userIndex === -1) {
+            window.location.href = 'login.html';
+        } else {
+            const user = users[userIndex];
+            document.getElementById('profile-name').value = user.name || '';
+            document.getElementById('profile-email').value = user.email || '';
+            document.getElementById('profile-course').value = user.course || '';
+            document.getElementById('profile-phone').value = user.phone || '';
+            document.getElementById('profile-location').value = user.location || '';
+            document.getElementById('profile-bio').value = user.bio || '';
+        }
+
+        // --- SAVE PROFILE ---
+        document.getElementById('profileForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            users[userIndex].name = document.getElementById('profile-name').value.trim();
+            users[userIndex].phone = document.getElementById('profile-phone').value.trim();
+            users[userIndex].location = document.getElementById('profile-location').value.trim();
+            users[userIndex].bio = document.getElementById('profile-bio').value.trim();
+
+            localStorage.setItem('users', JSON.stringify(users));
+
+            const successMsg = document.getElementById('success-msg');
+            successMsg.classList.add('visible');
+
+            setTimeout(() => {
+                window.location.href = 'dashboard.html';
+            }, 1500);
+        });
+
+        // --- LOGOUT ---
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            localStorage.removeItem('currentUser');
+            window.location.href = 'login.html';
+        });
+    </script>
+</body>
+</html>
