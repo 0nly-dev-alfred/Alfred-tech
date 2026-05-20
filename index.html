@@ -166,7 +166,36 @@
         }
 
         .btn-submit { width: 100%; padding: 14px; font-size: 1rem; margin-top: 10px; }
-        .nav-cta { padding: 8px 18px; }
+
+        /* --- NAV AUTH BUTTONS --- */
+        .nav-auth { display: flex; flex-direction: column; gap: 6px; align-items: center; }
+
+        .btn-nav-login {
+            text-decoration: none;
+            color: #ff00ff !important;
+            border: 1px solid #ff00ff;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            width: 100%;
+            text-align: center;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .btn-nav-login:hover { background: rgba(255, 0, 255, 0.1); }
+
+        .btn-nav-create {
+            text-decoration: none;
+            color: white !important;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            width: 100%;
+            text-align: center;
+            animation: colorCycle 3s infinite ease-in-out;
+        }
 
         @keyframes colorCycle { 
             0%, 100% { background-color: #ff00ff; box-shadow: 0 0 5px #ff00ff; }
@@ -228,11 +257,16 @@
             <a href="index.html">ALFRED TECH<span>ACADEMY</span></a>
         </div>
         <ul class="nav-links">
-    <li><a href="./index.html" style="color: #ff00ff;">Home</a></li>
-    <li><a href="./courses.html">Courses</a></li>
-    <li><a href="./about.html">About</a></li> 
-    <li><a href="#" class="nav-cta" onclick="document.getElementById('full-name').focus(); return false;">Register</a></li>
-</ul>
+            <li><a href="./index.html" style="color: #ff00ff;">Home</a></li>
+            <li><a href="./courses.html">Courses</a></li>
+            <li><a href="./about.html">About</a></li> 
+            <li>
+                <div class="nav-auth">
+                    <a href="create-account.html" class="btn-nav-create">Create Account</a>
+                    <a href="login.html" class="btn-nav-login">Login</a>
+                </div>
+            </li>
+        </ul>
     </nav>
 
     <div class="container">
@@ -259,6 +293,7 @@
                         <option value="Back-End Architecture">Back-End Architecture</option>
                         <option value="UI/UX Design Strategy">UI/UX Design Strategy</option>
                         <option value="Full-Stack Mastery">Full-Stack Mastery</option>
+                        <option value="Project Management">Project Management</option>
                     </select>
                 </div>
                 <button type="submit" id="submitBtn" class="btn-submit">Secure My Spot</button>
@@ -327,12 +362,22 @@
                 course_track: courseTrack
             })
             .then(() => {
+                // Load existing users array or start fresh
+                const users = JSON.parse(localStorage.getItem('users')) || [];
+
+                // Check if email already exists
+                const existing = users.find(u => u.email === emailValue);
+                if (!existing) {
+                    users.push({ name: nameValue, email: emailValue, course: courseTrack });
+                    localStorage.setItem('users', JSON.stringify(users));
+                }
+
                 confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
                 document.querySelector('.registration-box').innerHTML = `
                     <div style="text-align:center; padding: 20px;">
                         <h2 style="color: #ff00ff;">Access Granted</h2>
                         <p>Check <strong>${emailValue}</strong> for details.</p>
-                        <button onclick="window.location.reload()" class="btn-submit" style="margin-top:20px;">Close</button>
+                        <a href="create-account.html" class="btn-submit" style="margin-top:20px; text-align:center;">Create Account →</a>
                     </div>`;
             })
             .catch(() => {
