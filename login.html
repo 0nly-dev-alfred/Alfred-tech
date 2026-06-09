@@ -281,6 +281,12 @@
     </footer>
 
     <script>
+        // --- REDIRECT IF ALREADY LOGGED IN ---
+        const currentEmail = localStorage.getItem("currentUser");
+        const allUsers = JSON.parse(localStorage.getItem("users")) || [];
+        const loggedInUser = allUsers.find(u => u.email === currentEmail);
+        if (loggedInUser) window.location.href = "dashboard.html";
+
         document.getElementById('loginForm').addEventListener('submit', function(event) {
             event.preventDefault();
 
