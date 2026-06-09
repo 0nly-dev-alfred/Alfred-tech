@@ -184,8 +184,31 @@
                 <a href="dashboard.html" class="btn-dashboard">Skip for now → Go to Dashboard</a>
             </form>
         </div>
-    </div>
 
+
+        <!-- PASSWORD CHANGE -->
+        <div class="profile-box" style="margin-top: 20px; animation: none; opacity: 1; transform: none;">
+            <h3 style="margin-bottom: 20px; font-size: 1rem; color: #ff00ff;">🔒 Change Password</h3>
+            <div class="success-msg" id="pw-success-msg">Password updated successfully!</div>
+            <div class="success-msg" id="pw-error-msg" style="background: rgba(239,68,68,0.1); border-color: #ef4444; color: #ef4444; display:none;">Error.</div>
+            <form id="passwordForm">
+                <div class="input-group">
+                    <label for="current-password">Current Password</label>
+                    <input type="password" id="current-password" placeholder="••••••••" required>
+                </div>
+                <div class="input-group">
+                    <label for="new-password">New Password</label>
+                    <input type="password" id="new-password" placeholder="••••••••" minlength="6" required>
+                </div>
+                <div class="input-group">
+                    <label for="confirm-new-password">Confirm New Password</label>
+                    <input type="password" id="confirm-new-password" placeholder="••••••••" minlength="6" required>
+                </div>
+                <button type="submit" class="btn-submit" style="margin-top: 10px;">Update Password</button>
+            </form>
+        </div>
+
+    </div>
     <script>
         // --- LOAD USER DATA ---
         const currentEmail = localStorage.getItem('currentUser');
@@ -221,6 +244,24 @@
             setTimeout(() => {
                 window.location.href = 'dashboard.html';
             }, 1500);
+        });
+
+        // --- CHANGE PASSWORD ---
+        document.getElementById("passwordForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+            const currentPw = document.getElementById("current-password").value;
+            const newPw = document.getElementById("new-password").value;
+            const confirmPw = document.getElementById("confirm-new-password").value;
+            const pwSuccess = document.getElementById("pw-success-msg");
+            const pwError = document.getElementById("pw-error-msg");
+            pwSuccess.classList.remove("visible");
+            pwError.style.display = "none";
+            if (users[userIndex].password !== currentPw) { pwError.textContent = "Incorrect current password."; pwError.style.display = "block"; return; }
+            if (newPw !== confirmPw) { pwError.textContent = "New passwords do not match."; pwError.style.display = "block"; return; }
+            users[userIndex].password = newPw;
+            localStorage.setItem("users", JSON.stringify(users));
+            pwSuccess.classList.add("visible");
+            this.reset();
         });
 
         // --- LOGOUT ---
