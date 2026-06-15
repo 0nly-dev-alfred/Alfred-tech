@@ -56,15 +56,46 @@
             padding: 15px 5%; background: rgba(15, 23, 42, 0.98);
             backdrop-filter: blur(10px); z-index: 1000; border-bottom: 1px solid #1e293b; 
         }
+
         .nav-logo a { font-size: 1.2rem; font-weight: bold; color: white; text-decoration: none; }
         .nav-logo span { color: #ff00ff; }
         .nav-links { display: flex; list-style: none; gap: 15px; align-items: center; }
         .nav-links a { text-decoration: none; color: #cbd5e1; font-size: 0.85rem; transition: 0.3s; }
         .nav-links a:hover { color: #ff00ff; }
 
-        .nav-cta {
-            background: #ff00ff; color: white !important; padding: 6px 12px;
-            border-radius: 6px; font-weight: bold; font-size: 0.8rem !important;
+        /* --- NAV AUTH BUTTONS --- */
+        .nav-auth { display: flex; flex-direction: column; gap: 6px; align-items: center; }
+
+        .btn-nav-login {
+            text-decoration: none;
+            color: #ff00ff !important;
+            border: 1px solid #ff00ff;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            width: 100%;
+            text-align: center;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .btn-nav-login:hover { background: rgba(255, 0, 255, 0.1); }
+
+        .btn-nav-create {
+            text-decoration: none;
+            color: white !important;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            width: 100%;
+            text-align: center;
+            animation: colorCycle 3s infinite ease-in-out;
+        }
+
+        @keyframes colorCycle { 
+            0%, 100% { background-color: #ff00ff; box-shadow: 0 0 5px #ff00ff; }
+            50% { background-color: #7000ff; box-shadow: 0 0 20px #7000ff; }
         }
 
         /* --- HERO --- */
@@ -166,7 +197,7 @@
             <li><a href="index.html">Home</a></li>
             <li><a href="courses.html">Courses</a></li>
             <li><a href="about.html" style="color: #ff00ff;">About</a></li>
-            <li><a href="index.html" class="nav-cta">Register</a></li>
+            <li id="nav-auth-area"></li>
         </ul>
     </nav>
 
@@ -186,7 +217,7 @@
                 <h2>Adejumo Samuel Ademola</h2>
                 <span class="founder-tag">Lead Full-Stack Engineer & Technical Consultant</span>
                 
-                <p>Samuel is a specialist in crafting high-performance web systems and scalable digital infrastructure. With a background rooted in **complex system diagnostics**, he approaches software development with a rigorous, logic-first methodology.</p>
+                <p>Samuel is a specialist in crafting high-performance web systems and scalable digital infrastructure. With a background rooted in <strong>complex system diagnostics</strong>, he approaches software development with a rigorous, logic-first methodology.</p>
                 
                 <div class="skill-tags">
                     <div class="tag">MERN Stack</div>
@@ -205,7 +236,7 @@
             <div class="story-content">
                 <p>The academy began with <strong>Samuel</strong> hunched over an HP laptop at 2:00 AM, teaching himself the depths of JavaScript and asynchronous logic amidst the challenges of limited resources.</p>
                 <blockquote>
-                    "The gap between a student and an expert isn't talent—it’s the willingness to stay awake until the code finally turns green."
+                    "The gap between a student and an expert isn't talent—it's the willingness to stay awake until the code finally turns green."
                 </blockquote>
                 <p>Every technical hurdle became a brick in the foundation of Alfred Tech. This is a path forged in grit, designed for those ready to lead the next generation of African engineering.</p>
             </div>
@@ -214,7 +245,7 @@
         <section class="story-section" style="border-left-color: #00d2ff; background: rgba(0, 210, 255, 0.05); margin-top: 20px;">
             <span class="section-title" style="color: #00d2ff;">Our Philosophy</span>
             <h2>Engineering, Not Just Coding</h2>
-            <p>At Alfred Tech, we believe that understanding **data flow** and **asynchronous logic** is just as important as writing clean syntax. We train our students to be versatile engineers—the kind of developers who can build complex landing pages for industrial services and script advanced automation tools from scratch.</p>
+            <p>At Alfred Tech, we believe that understanding <strong>data flow</strong> and <strong>asynchronous logic</strong> is just as important as writing clean syntax. We train our students to be versatile engineers—the kind of developers who can build complex landing pages for industrial services and script advanced automation tools from scratch.</p>
         </section>
 
         <div class="stats-grid">
@@ -229,6 +260,26 @@
     </footer>
 
     <script>
+        // --- SMART NAVBAR ---
+        const currentEmail = localStorage.getItem('currentUser');
+        const users = JSON.parse(localStorage.getItem('users')) || [];
+        const loggedInUser = users.find(u => u.email === currentEmail);
+        const authArea = document.getElementById('nav-auth-area');
+
+        if (loggedInUser) {
+            authArea.innerHTML = `
+                <span class="nav-username">Hi, <span>${loggedInUser.name.split(' ')[0]}</span></span>
+                <button class="btn-logout" onclick="localStorage.removeItem('currentUser'); window.location.reload();">Logout</button>
+            `;
+        } else {
+            authArea.innerHTML = `
+                <div class="nav-auth">
+                    <a href="create-account.html" class="btn-nav-create">Create Account</a>
+                    <a href="login.html" class="btn-nav-login">Login</a>
+                </div>
+            `;
+        }
+
         window.addEventListener('DOMContentLoaded', () => {
             const vault = document.getElementById('vault-loader');
             setTimeout(() => {
